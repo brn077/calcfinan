@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escáner Financiero — Auditoría de Honorarios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!--
+  ======================================================================
+  NOMBRE DE MARCA
+  ======================================================================
+  Elegí "Escáner Financiero" porque encaja con la narrativa de análisis
+  ("sincronizando", "comparando", "detectando"). Otras opciones válidas,
+  si prefieren cambiar (aparece en pocos lugares — busca "ESCÁNER
+  FINANCIERO" y "Escáner Financiero" en este archivo):
+
+    Auditoría de Honorarios · Diagnóstico de Ingresos ·
+    Radiografía Financiera · Auditor Inteligente ·
+    Informe de Rentabilidad · Escáner de Tarifas
+
+  ======================================================================
+  NOTA SOBRE HONESTIDAD EN LA COPY
+  ======================================================================
+  El bloque de comparación NO usa una estadística de mercado inventada
+  (ej. "estás por debajo del 71% del mercado"). Eso sería una afirmación
+  poblacional falsa. En su lugar, la comparación se calcula con los
+  propios datos de la persona (su tarifa actual vs. su tarifa mínima
+  calculada) — mismo impacto emocional, sin inventar un dato de terceros.
+
+  Tampoco se afirma literalmente "inteligencia artificial" analizando
+  la información — es una fórmula matemática, no un modelo de IA. La
+  narrativa de "sistema" y "análisis" se mantiene, sin esa afirmación
+  específica.
+
+  ======================================================================
+  CÓMO CONFIGURAR EL DESBLOQUEO DE PAGO (leer antes de publicar)
+  ======================================================================
+  OPCIÓN 1 — Hotmart / Kiwify (recomendado para empezar, sin backend):
+    1. Reemplaza CHECKOUT_URL más abajo por tu link de checkout.
+    2. Configura la página de agradecimiento para redirigir a esta
+       misma página con "?pagado=true" al final de la URL.
+    3. Esta página detecta ese parámetro y desbloquea el informe solo.
+
+  OPCIÓN 2 — Backend propio con webhook (Stripe / Mercado Pago API):
+    Reemplaza checkIfUnlocked() para verificar un token contra tu propio
+    endpoint en vez de mirar "?pagado=true". Ver el bloque de código al
+    final del archivo.
+
+  Ninguna llave de pago debe colocarse en este archivo HTML.
+  ======================================================================
+-->
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0c;
+    --surface: #131316;
+    --surface-2: #1b1b1f;
+    --border: #262629;
+    --text: #ededef;
+    --text-dim: #8a8a93;
+    --text-faint: #57575f;
+    --accent: #e8a23d;
+    --accent-dim: rgba(232,162,61,0.1);
+    --restricted: #e2574c;
+    --restricted-dim: rgba(226,87,76,0.1);
+  }
+
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 800px 500px at 50% -10%, rgba(232,162,61,0.06), transparent),
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: auto, 48px 48px, 48px 48px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--text);
+    padding: 56px 18px 100px;
+    min-height: 100vh;
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .intro {
+    max-width: 480px;
+    margin: 0 auto 36px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: "";
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .intro h1 {
+    font-size: clamp(26px, 5vw, 32px);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+
+  .intro p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .panel-wrap {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 26px;
+    position: relative;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .panel-header .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+  .panel-header .brand span { color: var(--accent); }
+  .panel-header .id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-faint);
+  }
+
+  /* ---------- progress ---------- */
+  .progress-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-track {
+    height: 3px;
+    background: var(--surface-2);
+    border-radius: 3px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #f4c07a);
+    width: 0%;
+    transition: width 0.35s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ---------- quiz step ---------- */
+  .step { animation: stepIn 0.35s cubic-bezier(.2,.8,.3,1); }
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-question {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    letter-spacing: -0.005em;
+  }
+
+  .step-input-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+  .step-input-row:focus-within { border-color: var(--accent); }
+  .step-input-row .prefix { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--text-dim); }
+  .step-input-row input {
+    flex: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  .step-input-row .suffix { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text-faint); }
+
+  .step-hint { font-size: 12.5px; color: var(--text-faint); line-height: 1.55; margin-bottom: 22px; }
+
+  .step-nav { display: flex; gap: 10px; }
+
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--accent); color: #1a1206; flex: 1; text-align: center; transition: filter 0.15s, transform 0.15s; }
+  .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--text-faint); color: var(--text); }
+
+  /* ---------- analysis sequence ---------- */
+  #analysisState { text-align: center; padding: 12px 0 4px; }
+  .scan-ring {
+    width: 64px; height: 64px;
+    margin: 4px auto 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .analysis-stage {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    min-height: 20px;
+    margin-bottom: 18px;
+  }
+  .analysis-stage .cursor { color: var(--accent); animation: blink 1s step-start infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .analysis-log {
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    line-height: 1.9;
+    max-height: 90px;
+    overflow: hidden;
+  }
+  .analysis-log div { animation: logIn 0.3s ease-out; }
+  .analysis-log .done { color: #4a7a5f; }
+  @keyframes logIn { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } }
+
+  /* ---------- report ---------- */
+  .report-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 4px;
+  }
+
+  .compare-block { margin: 4px 0 20px; }
+  .compare-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .compare-row .who { font-size: 12.5px; color: var(--text-dim); }
+  .compare-row .val { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; }
+  .compare-bar-track { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+  .compare-bar-fill { height: 100%; border-radius: 4px; transition: width 1s cubic-bezier(.2,.8,.2,1); }
+  .compare-bar-fill.current { background: var(--text-faint); }
+  .compare-bar-fill.recommended { background: linear-gradient(90deg, var(--accent), #f4c07a); }
+
+  .gap-line {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+  .gap-line strong { color: var(--accent); }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .metric-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .metric-card .label { font-size: 10.5px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .metric-card .value { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; }
+
+  /* ---------- restricted / locked ---------- */
+  .restricted-section { position: relative; margin-top: 4px; }
+
+  .restricted-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .restricted-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--restricted);
+    background: var(--restricted-dim);
+    border: 1px solid rgba(226,87,76,0.35);
+    border-radius: 5px;
+    padding: 4px 9px;
+    animation: tagDrop 0.5s cubic-bezier(.2,.85,.25,1.25) forwards;
+  }
+  @keyframes tagDrop {
+    0%   { transform: translateY(-40px) scale(1.3); opacity: 0; }
+    60%  { transform: translateY(0) scale(1.04); opacity: 1; }
+    100% { transform: translateY(0) scale(1); }
+  }
+  .restricted-line { flex: 1; height: 1px; background: var(--border); }
+
+  .restricted-content {
+    filter: blur(6px);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .unlock-card {
+    margin-top: 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 20px 18px;
+    text-align: center;
+  }
+  .unlock-card p {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .email-row { margin-bottom: 10px; }
+  .email-row input {
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    outline: none;
+    text-align: center;
+  }
+  .email-row input:focus { border-color: var(--accent); }
+  .email-error { font-size: 11.5px; color: var(--restricted); font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; }
+
+  .unlock-btn {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px; font-weight: 700;
+    color: #1a1206;
+    background: linear-gradient(180deg, #f0b358, var(--accent));
+    border: none; border-radius: 10px;
+    padding: 15px; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(232,162,61,0.25);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .unlock-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(232,162,61,0.32); }
+  .unlock-btn:active { transform: translateY(0); }
+
+  .price-line { font-size: 11px; color: var(--text-faint); margin-top: 10px; line-height: 1.5; }
+  .price-line strong { color: var(--text-dim); }
+
+  .footer-note {
+    max-width: 460px; margin: 22px auto 0;
+    text-align: center; font-size: 12px; color: var(--text-faint); line-height: 1.6;
+  }
+
+  .hidden { display: none; }
+
+  @media (max-width: 380px) {
+    .metric-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .panel { padding: 22px 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step, .analysis-log div, .restricted-tag, .scan-ring { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <div class="eyebrow">Sistema de auditoría financiera</div>
+  <h1>Descubre cuánto dinero estás perdiendo sin saberlo</h1>
+  <p>Analizamos tu estructura de ingresos, gastos y tiempo facturable para calcular tu tarifa mínima sostenible — y cuánto te cuesta cobrar por debajo de ella.</p>
+</div>
+
+<div class="panel-wrap">
+  <div class="panel">
+    <div class="panel-header">
+      <div class="brand">ESCÁNER<span>·</span>FINANCIERO</div>
+      <div class="id mono" id="reportId"></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quizState">
+      <div class="progress-label">
+        <span id="progressLabel">Punto 1 de 7</span>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="step" id="stepContainer"></div>
+    </div>
+
+    <!-- ANALYSIS SEQUENCE -->
+    <div id="analysisState" class="hidden">
+      <div class="scan-ring"></div>
+      <div class="analysis-stage mono"><span id="stageText">Iniciando...</span><span class="cursor">▍</span></div>
+      <div class="progress-track"><div class="progress-fill" id="analysisFill"></div></div>
+      <div class="analysis-log mono" id="analysisLog"></div>
+    </div>
+
+    <!-- REPORT -->
+    <div id="resultState" class="hidden">
+      <div class="report-tag">Comparación de tarifa</div>
+      <div class="compare-block">
+        <div class="compare-row"><span class="who">Hoy cobras</span><span class="val" id="valActual">$0/h</span></div>
+        <div class="compare-bar-track"><div class="compare-bar-fill current" id="barActual" style="width:0%"></div></div>
+        <div class="compare-row"><span class="who">Tarifa mínima sostenible</span><span class="val" id="valRecomendada">$0/h</span></div>
+        <div class="compare-bar-track"><div class="compare-bar-fill recommended" id="barRecomendada" style="width:0%"></div></div>
+      </div>
+
+      <div class="gap-line" id="gapLine"></div>
+
+      <div class="metric-grid">
+        <div class="metric-card"><div class="label">Pérdida / hora</div><div class="value" id="mHora">$0</div></div>
+        <div class="metric-card"><div class="label">Pérdida diaria</div><div class="value" id="mDia">$0</div></div>
+        <div class="metric-card"><div class="label">Pérdida semanal</div><div class="value" id="mSemana">$0</div></div>
+        <div class="metric-card"><div class="label">Pérdida mensual</div><div class="value" id="mMes">$0</div></div>
+      </div>
+
+      <div class="restricted-section">
+        <div class="restricted-header">
+          <span class="restricted-tag">Informe reservado</span>
+          <div class="restricted-line"></div>
+        </div>
+
+        <div class="restricted-content" id="restrictedContent">
+          <div class="metric-grid">
+            <div class="metric-card"><div class="label">Pérdida desde enero</div><div class="value" id="mEnero">$0</div></div>
+            <div class="metric-card"><div class="label">Proyección a 5 años</div><div class="value" id="m5anos">$0</div></div>
+          </div>
+          <div class="gap-line" id="diasLine"></div>
+        </div>
+
+        <div class="unlock-card">
+          <p>La parte más reveladora de tu informe permanece restringida. Se libera al confirmar tu auditoría — también te la enviamos a tu correo.</p>
+          <div class="email-row">
+            <input type="email" id="leadEmail" placeholder="tu@email.com" autocomplete="email">
+          </div>
+          <div class="email-error hidden" id="emailError">Ingresa un correo válido para continuar.</div>
+          <button class="unlock-btn" id="unlockBtn">Quiero desbloquear mi informe</button>
+          <div class="price-line">Costo simbólico de activación: <strong>$97 MXN</strong> · se acredita si tu informe no revela ninguna pérdida real</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  Este informe se calcula a partir de la información que proporcionas. No sustituye asesoría contable o financiera profesional.
+</div>
+
+<script>
+  const CHECKOUT_URL = "https://pay.hotmart.com/REEMPLAZA-CON-TU-LINK-DE-CHECKOUT";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/REEMPLAZA-CON-TU-ID/exec";
+
+  document.getElementById("reportId").textContent = "ID-" + Math.floor(100000 + Math.random()*900000);
+
+  const QUESTIONS = [
+    { id: "I",  q: "¿Cuánto quieres ganar neto al mes?", hint: "Lo que necesitas que quede disponible después de gastos e impuestos.", prefix: "$", suffix: "MXN / mes", default: 30000 },
+    { id: "G",  q: "¿Cuánto gastas al mes solo para operar?", hint: "Software, herramientas, internet, espacio de trabajo.", prefix: "$", suffix: "MXN / mes", default: 2000 },
+    { id: "T",  q: "¿Qué porcentaje reservas para impuestos?", hint: "Usa un estimado si no llevas el cálculo exacto.", prefix: "", suffix: "%", default: 15 },
+    { id: "D",  q: "¿Cuántos días hábiles tiene tu mes?", hint: "Déjalo en 22 si no estás seguro.", prefix: "", suffix: "días", default: 22 },
+    { id: "V",  q: "¿Cuántos de esos días no facturas?", hint: "Imprevistos, feriados, días sin clientes.", prefix: "", suffix: "días", default: 4 },
+    { id: "H",  q: "¿Cuántas horas al día realmente facturas?", hint: "Sin reuniones, propuestas ni tareas administrativas.", prefix: "", suffix: "horas", default: 4 },
+    { id: "Ta", q: "¿Cuánto cobras hoy por hora?", hint: "Tu tarifa actual, aunque no sea fija.", prefix: "$", suffix: "MXN/h", default: 150 }
+  ];
+
+  const ANALYSIS_STAGES = [
+    "Sincronizando información...",
+    "Comparando con estructuras similares...",
+    "Calculando costo operativo...",
+    "Analizando margen financiero...",
+    "Detectando pérdidas ocultas...",
+    "Calculando tarifa sostenible...",
+    "Estimando pérdida anual...",
+    "Generando informe...",
+    "Finalizando auditoría..."
+  ];
+
+  const answers = {};
+  let current = 0;
+  let lastResult = {};
+
+  function fmt(n){ return "$" + Math.round(n).toLocaleString("es-MX"); }
+
+  // ================= AUDIO (opcional, minimalista) =================
+  let audioCtx = null;
+  function tick(freq){
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = "sine"; o.frequency.value = freq || 720;
+      g.gain.setValueAtTime(0.05, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.08);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(); o.stop(audioCtx.currentTime + 0.08);
+    } catch(e) {}
+  }
+
+  // ================= COUNT-UP ANIMATION =================
+  function animateValue(el, to, formatFn, duration){
+    const start = performance.now();
+    const dur = duration || 900;
+    function frame(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = formatFn(to * eased);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ================= QUIZ RENDER =================
+  function renderStep(){
+    const item = QUESTIONS[current];
+    document.getElementById("progressLabel").textContent = "Punto " + (current + 1) + " de " + QUESTIONS.length;
+    document.getElementById("progressPercent").textContent = Math.round((current / QUESTIONS.length) * 100) + "%";
+    document.getElementById("progressFill").style.width = Math.round((current / QUESTIONS.length) * 100) + "%";
+
+    const isLast = current === QUESTIONS.length - 1;
+    const existingValue = answers[item.id] !== undefined ? answers[item.id] : item.default;
+
+    document.getElementById("stepContainer").innerHTML =
+      '<div class="step-question">' + item.q + '</div>' +
+      '<div class="step-input-row">' +
+        (item.prefix ? '<span class="prefix">' + item.prefix + '</span>' : '') +
+        '<input type="number" id="stepInput" value="' + existingValue + '" inputmode="decimal">' +
+        '<span class="suffix">' + item.suffix + '</span>' +
+      '</div>' +
+      '<div class="step-hint">' + item.hint + '</div>' +
+      '<div class="step-nav">' +
+        (current > 0 ? '<button class="btn btn-ghost" id="backBtn">Atrás</button>' : '') +
+        '<button class="btn btn-primary" id="nextBtn">' + (isLast ? "Analizar mi información" : "Siguiente") + '</button>' +
+      '</div>';
+
+    const input = document.getElementById("stepInput");
+    input.focus(); input.select();
+
+    document.getElementById("nextBtn").addEventListener("click", handleNext);
+    input.addEventListener("keydown", function(e){ if (e.key === "Enter") handleNext(); });
+
+    const backBtn = document.getElementById("backBtn");
+    if (backBtn) backBtn.addEventListener("click", function(){ current--; renderStep(); });
+  }
+
+  function handleNext(){
+    const item = QUESTIONS[current];
+    const val = parseFloat(document.getElementById("stepInput").value) || 0;
+    answers[item.id] = val;
+    tick(680);
+
+    if (current === QUESTIONS.length - 1){
+      runAnalysis();
+    } else {
+      current++;
+      renderStep();
+    }
+  }
+
+  // ================= CINEMATIC ANALYSIS =================
+  function runAnalysis(){
+    document.getElementById("quizState").classList.add("hidden");
+    document.getElementById("analysisState").classList.remove("hidden");
+
+    const stageEl = document.getElementById("stageText");
+    const fillEl = document.getElementById("analysisFill");
+    const logEl = document.getElementById("analysisLog");
+    logEl.innerHTML = "";
+
+    let i = 0;
+    function nextStage(){
+      if (i > 0){
+        const prevLine = logEl.children[logEl.children.length - 1];
+        if (prevLine) prevLine.classList.add("done");
+      }
+      if (i >= ANALYSIS_STAGES.length){
+        setTimeout(showResult, 300);
+        return;
+      }
+      stageEl.textContent = ANALYSIS_STAGES[i];
+      fillEl.style.width = Math.round(((i + 1) / ANALYSIS_STAGES.length) * 100) + "%";
+
+      const line = document.createElement("div");
+      line.textContent = "> " + ANALYSIS_STAGES[i];
+      logEl.appendChild(line);
+      while (logEl.children.length > 4) logEl.removeChild(logEl.firstChild);
+
+      tick(520 + i * 30);
+      i++;
+      setTimeout(nextStage, 600 + Math.random() * 600);
+    }
+    nextStage();
+  }
+
+  // ================= RESULT CALC =================
+  function showResult(){
+    document.getElementById("analysisState").classList.add("hidden");
+    document.getElementById("resultState").classList.remove("hidden");
+
+    const v = answers;
+    const bruto = (v.I + v.G) / (1 - Math.min(v.T,90)/100);
+    const diasFacturables = Math.max(v.D - v.V, 1);
+    const horas = Math.max(v.H, 0.1);
+    const tarifaHora = bruto / (diasFacturables * horas);
+    const diferenciaHora = tarifaHora - v.Ta;
+
+    const perdidaDiaria = diferenciaHora * horas;
+    const perdidaSemanal = perdidaDiaria * (diasFacturables / 4.33);
+    const perdidaMensual = diferenciaHora * diasFacturables * horas;
+    const perdidaAnual = perdidaMensual * 12;
+    const perdida5anos = perdidaAnual * 5;
+
+    const now = new Date();
+    const mesesDesdeEnero = Math.max(now.getMonth() + 1, 1);
+    const perdidaDesdeEnero = perdidaMensual * mesesDesdeEnero;
+
+    const ratio = v.Ta / Math.max(tarifaHora, 0.01);
+    const diasPagadosEquivalente = Math.max(diasFacturables * Math.min(ratio, 1), 0);
+    const diasSinCompensar = Math.max(diasFacturables - diasPagadosEquivalente, 0);
+
+    lastResult = {
+      tarifaHora: Math.round(tarifaHora),
+      tarifaActual: Math.round(v.Ta),
+      perdidaMensual: Math.round(perdidaMensual),
+      perdidaAnual: Math.round(perdidaAnual)
+    };
+
+    animateValue(document.getElementById("valActual"), v.Ta, fmt, 700);
+    document.getElementById("valActual").textContent = fmt(v.Ta) + "/h";
+    animateValue(document.getElementById("valRecomendada"), tarifaHora, function(n){ return fmt(n) + "/h"; }, 900);
+
+    const maxBar = Math.max(v.Ta, tarifaHora);
+    setTimeout(function(){
+      document.getElementById("barActual").style.width = Math.max((v.Ta / maxBar) * 100, 4) + "%";
+      document.getElementById("barRecomendada").style.width = Math.max((tarifaHora / maxBar) * 100, 4) + "%";
+    }, 60);
+
+    const gapEl = document.getElementById("gapLine");
+    if (diferenciaHora > 0){
+      const gapPct = Math.round((1 - ratio) * 100);
+      const mesesExtra = (perdidaAnual / Math.max(bruto,1)).toFixed(1);
+      gapEl.innerHTML = 'Tu tarifa actual está <strong>' + gapPct + '% por debajo</strong> de tu mínimo sostenible calculado. Al año, esto equivale a aproximadamente <strong>' + mesesExtra + ' meses</strong> de trabajo adicional para compensar la diferencia.';
+    } else {
+      gapEl.innerHTML = 'Tu tarifa actual está <strong>por encima</strong> de tu mínimo sostenible calculado. Estás capturando un margen adicional real.';
+    }
+
+    animateValue(document.getElementById("mHora"), Math.abs(diferenciaHora), fmt, 700);
+    animateValue(document.getElementById("mDia"), Math.abs(perdidaDiaria), fmt, 800);
+    animateValue(document.getElementById("mSemana"), Math.abs(perdidaSemanal), fmt, 900);
+    animateValue(document.getElementById("mMes"), Math.abs(perdidaMensual), fmt, 1000);
+    animateValue(document.getElementById("mEnero"), Math.abs(perdidaDesdeEnero), fmt, 900);
+    animateValue(document.getElementById("m5anos"), Math.abs(perdida5anos), fmt, 1100);
+
+    const diasEl = document.getElementById("diasLine");
+    diasEl.innerHTML = 'Hoy trabajas cerca de <strong>' + diasFacturables + ' días</strong> al mes. Pero tu remuneración equivale a aproximadamente <strong>' + Math.round(diasPagadosEquivalente) + ' días</strong>. Los otros ' + Math.round(diasSinCompensar) + ' días representan valor que generas sin recibir una compensación adecuada. Esto no significa que trabajes poco — significa que tu estructura de precios está afectando tu rentabilidad.';
+
+    const tag = document.querySelector(".restricted-tag");
+    tag.style.animation = "none"; void tag.offsetWidth; tag.style.animation = "";
+
+    checkIfUnlocked();
+  }
+
+  // ================= LEAD CAPTURE + UNLOCK =================
+  function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+  function sendLeadToSheet(email){
+    const payload = Object.assign({}, answers, lastResult, { email: email, fecha: new Date().toISOString() });
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    }).catch(function(err){ console.error("No se pudo guardar el lead:", err); });
+  }
+
+  document.getElementById("unlockBtn").addEventListener("click", function(){
+    const emailInput = document.getElementById("leadEmail");
+    const errorEl = document.getElementById("emailError");
+    const email = emailInput.value.trim();
+    if (!isValidEmail(email)){
+      errorEl.classList.remove("hidden");
+      emailInput.focus();
+      return;
+    }
+    errorEl.classList.add("hidden");
+    sendLeadToSheet(email);
+    const separator = CHECKOUT_URL.includes("?") ? "&" : "?";
+    window.location.href = CHECKOUT_URL + separator + "email=" + encodeURIComponent(email);
+  });
+
+  function unlockReport(){
+    const content = document.getElementById("restrictedContent");
+    const tagEl = document.querySelector(".restricted-tag");
+    content.style.filter = "none";
+    content.style.pointerEvents = "auto";
+    if (tagEl){ tagEl.textContent = "Informe liberado"; tagEl.style.color = "#4fce8a"; tagEl.style.background = "rgba(79,206,138,0.1)"; tagEl.style.borderColor = "rgba(79,206,138,0.35)"; }
+    const unlockCard = document.querySelector(".unlock-card");
+    if (unlockCard) unlockCard.remove();
+  }
+
+  function checkIfUnlocked(){
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("pagado") === "true"){ unlockReport(); return; }
+    // OPCIÓN 2 (backend propio): reemplazar por verificación real de token.
+    // const token = params.get("token");
+    // if (token) { fetch("/api/verificar-token?token=" + encodeURIComponent(token)).then(r => r.json()).then(d => { if (d.valido) unlockReport(); }); }
+  }
+
+  renderStep();
+</script>
+
+<!--
+  ======================================================================
+  CONFIGURAR EL GUARDADO DE LEADS (Google Sheets) — paso a paso
+  ======================================================================
+  1. Crea una hoja nueva en Google Sheets (sheets.google.com).
+
+  2. Ve a Extensiones > Apps Script. Borra el código de ejemplo y pega esto:
+
+     function doPost(e) {
+       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+       var data = JSON.parse(e.postData.contents);
+       sheet.appendRow([
+         new Date(),
+         data.email,
+         data.I, data.G, data.T, data.D, data.V, data.H, data.Ta,
+         data.tarifaActual, data.tarifaHora, data.perdidaMensual, data.perdidaAnual
+       ]);
+       return ContentService.createTextOutput("ok");
+     }
+
+  3. Clic en "Implementar" > "Nueva implementación" > tipo "Aplicación
+     web". En "Quién tiene acceso" elige "Cualquier usuario". Copia la
+     URL que te da (termina en /exec).
+
+  4. Pega esa URL en la constante GOOGLE_SCRIPT_URL al inicio del script
+     de esta página.
+
+  5. Prueba: completa el flujo en esta página, escribe un correo y haz
+     clic en "Quiero desbloquear mi informe". Revisa tu Google Sheet —
+     debería aparecer una fila nueva, incluso antes de completar el pago.
+
+  Para el envío del correo con el link a entrega.html después del pago,
+  ver plantilla-correo-entrega.txt.
+  ======================================================================
+-->
+
+</body>
+</html>
