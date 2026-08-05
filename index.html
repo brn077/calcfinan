@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tarifa Real — Auditoría de Honorarios</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgZmlsbD0nIzBhMGEwYycvPjxjaXJjbGUgY3g9JzUwJyBjeT0nNTAnIHI9JzM2JyBmaWxsPSdub25lJyBzdHJva2U9JyM1OTQ4MWYnIHN0cm9rZS13aWR0aD0nNScvPjx0ZXh0IHg9JzUwJyB5PSc2OScgZm9udC1mYW1pbHk9J0NvdXJpZXIgTmV3LCBtb25vc3BhY2UnIGZvbnQtd2VpZ2h0PSc3MDAnIGZvbnQtc2l6ZT0nNTYnIGZpbGw9JyNlOGEyM2QnIHRleHQtYW5jaG9yPSdtaWRkbGUnPiQ8L3RleHQ+PC9zdmc+">
-<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<title>Mentes Brillantes™ — 3X1 Colección para chicos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
 
 <!-- Meta Pixel Code -->
 <script>
@@ -19,1152 +21,560 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '792872853072313');
+fbq('init', '1269943107869825');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=1269943107869825&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
-<!--
-  ======================================================================
-  NOMBRE DE MARCA
-  ======================================================================
-  Nombre elegido: "Tarifa Real" — corto, fácil de recordar, y directo
-  a la promesa central (la tarifa que deberías cobrar de verdad).
-  Aparece en pocos lugares — busca "TARIFA REAL" y "Tarifa Real" en
-  este archivo si quieren cambiarlo de nuevo. Otras opciones que se
-  consideraron:
-
-    Escáner Financiero · Auditoría de Honorarios · Diagnóstico de
-    Ingresos · Radiografía Financiera · Auditor Inteligente ·
-    Informe de Rentabilidad
-
-  ======================================================================
-  NOTA SOBRE HONESTIDAD EN LA COPY
-  ======================================================================
-  El bloque de comparación NO usa una estadística de mercado inventada
-  (ej. "estás por debajo del 71% del mercado"). Eso sería una afirmación
-  poblacional falsa. En su lugar, la comparación se calcula con los
-  propios datos de la persona (su tarifa actual vs. su tarifa mínima
-  calculada) — mismo impacto emocional, sin inventar un dato de terceros.
-
-  Tampoco se afirma literalmente "inteligencia artificial" analizando
-  la información — es una fórmula matemática, no un modelo de IA. La
-  narrativa de "sistema" y "análisis" se mantiene, sin esa afirmación
-  específica.
-
-  ======================================================================
-  CÓMO CONFIGURAR EL DESBLOQUEO DE PAGO (leer antes de publicar)
-  ======================================================================
-  OPCIÓN 1 — Hotmart / Kiwify (recomendado para empezar, sin backend):
-    1. Reemplaza CHECKOUT_URL más abajo por tu link de checkout.
-    2. Configura la página de agradecimiento para redirigir a esta
-       misma página con "?pagado=true" al final de la URL.
-    3. Esta página detecta ese parámetro y desbloquea el informe solo.
-
-  OPCIÓN 2 — Backend propio con webhook (Stripe / Mercado Pago API):
-    Reemplaza checkIfUnlocked() para verificar un token contra tu propio
-    endpoint en vez de mirar "?pagado=true". Ver el bloque de código al
-    final del archivo.
-
-  Ninguna llave de pago debe colocarse en este archivo HTML.
-  ======================================================================
--->
-
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #0a0a0c;
-    --surface: #131316;
-    --surface-2: #1b1b1f;
-    --border: #262629;
-    --text: #ededef;
-    --text-dim: #8a8a93;
-    --text-faint: #57575f;
-    --accent: #e8a23d;
-    --accent-dim: rgba(232,162,61,0.1);
-    --restricted: #e2574c;
-    --restricted-dim: rgba(226,87,76,0.1);
-  }
-
-  html { -webkit-font-smoothing: antialiased; }
-
-  body {
-    background: var(--bg);
-    background-image:
-      radial-gradient(ellipse 800px 500px at 50% -10%, rgba(232,162,61,0.06), transparent),
-      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: auto, 48px 48px, 48px 48px;
-    font-family: 'Inter', -apple-system, sans-serif;
-    color: var(--text);
-    padding: 56px 18px 100px;
-    min-height: 100vh;
-  }
-
-  .mono { font-family: 'JetBrains Mono', monospace; }
-
-  .intro {
-    max-width: 480px;
-    margin: 0 auto 36px;
-    text-align: center;
-  }
-
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  .eyebrow::before, .eyebrow::after {
-    content: "";
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-  }
-
-  .intro h1 {
-    font-size: clamp(26px, 5vw, 32px);
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    margin-bottom: 14px;
-  }
-
-  .intro p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--text-dim);
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  .panel-wrap {
-    max-width: 460px;
-    margin: 0 auto;
-  }
-
-  .panel {
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)), rgba(19,19,22,0.72);
-    backdrop-filter: blur(24px) saturate(140%);
-    -webkit-backdrop-filter: blur(24px) saturate(140%);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 28px 26px;
-    position: relative;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
-    transition: box-shadow 0.4s ease;
-  }
-
-  .panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-  .panel-header .brand {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--text);
-  }
-  .panel-header .brand span { color: var(--accent); }
-  .panel-header .id {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--text-faint);
-  }
-
-  /* ---------- progress ---------- */
-  .progress-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--text-faint);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-  }
-  .progress-track {
-    height: 3px;
-    background: var(--surface-2);
-    border-radius: 3px;
-    margin-bottom: 22px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), #f4c07a);
-    width: 0%;
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
-    box-shadow: 0 0 12px rgba(232,162,61,0.5);
-  }
-
-  .progress-msg {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    margin: -14px 0 16px;
-    min-height: 14px;
-    opacity: 0;
-    animation: msgFade 1.8s ease-in-out forwards;
-  }
-  @keyframes msgFade {
-    0% { opacity: 0; transform: translateY(-2px); }
-    15% { opacity: 1; transform: translateY(0); }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-  .step-check {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.5);
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    background: rgba(79,206,138,0.12);
-    border: 2px solid #4fce8a;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 999;
-  }
-  .step-check.show { animation: checkPop 0.65s cubic-bezier(.2,.8,.2,1) forwards; }
-  .step-check svg { width: 32px; height: 32px; }
-  @keyframes checkPop {
-    0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.4); }
-    35%  { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
-    55%  { transform: translate(-50%,-50%) scale(1); }
-    80%  { opacity: 1; }
-    100% { opacity: 0; transform: translate(-50%,-50%) scale(1); }
-  }
-
-  .affirm-toast {
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: #4fce8a;
-    min-height: 16px;
-    margin-bottom: 4px;
-  }
-
-  /* subtle "vibration" feedback on answer confirm */
-  .pulse-confirm { animation: pulseConfirm 0.3s ease-out; }
-  @keyframes pulseConfirm {
-    0% { transform: scale(1); }
-    40% { transform: scale(1.015); }
-    100% { transform: scale(1); }
-  }
-
-  /* ---------- quiz step ---------- */
-  .step { animation: stepIn 0.35s cubic-bezier(.2,.8,.3,1); }
-  @keyframes stepIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .step-question {
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.4;
-    margin-bottom: 16px;
-    letter-spacing: -0.005em;
-  }
-
-  .step-input-row {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    transition: border-color 0.2s;
-  }
-  .step-input-row:focus-within { border-color: var(--accent); }
-  .step-input-row .prefix { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--text-dim); }
-  .step-input-row input {
-    flex: 1;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--text);
-    background: transparent;
-    border: none;
-    outline: none;
-    width: 100%;
-  }
-  .step-input-row .suffix { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text-faint); }
-
-  .step-hint { font-size: 12.5px; color: var(--text-faint); line-height: 1.55; margin-bottom: 22px; }
-
-  .step-nav { display: flex; gap: 10px; }
-
-  .trust-row {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px;
-    color: var(--text-faint);
-    letter-spacing: 0.02em;
-  }
-
-  .btn {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    padding: 14px 18px;
-    cursor: pointer;
-    display: inline-block;
-  }
-  .btn-primary { background: var(--accent); color: #1a1206; flex: 1; text-align: center; transition: filter 0.15s, transform 0.15s; }
-  .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: var(--text-faint); color: var(--text); }
-
-  /* ---------- analysis sequence ---------- */
-  #analysisState { text-align: center; padding: 12px 0 4px; }
-  .scan-ring {
-    width: 64px; height: 64px;
-    margin: 4px auto 24px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    border-top-color: var(--accent);
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .analysis-stage {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13.5px;
-    color: var(--text-dim);
-    min-height: 20px;
-    margin-bottom: 18px;
-  }
-  .analysis-stage .cursor { color: var(--accent); animation: blink 1s step-start infinite; }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  .analysis-log {
-    text-align: left;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--text-faint);
-    line-height: 1.9;
-    max-height: 90px;
-    overflow: hidden;
-  }
-  .analysis-log div { animation: logIn 0.3s ease-out; }
-  .analysis-log .done { color: #4a7a5f; }
-  @keyframes logIn { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } }
-
-  /* ---------- conclusion moment ---------- */
-  .conclusion-badge {
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    color: #4fce8a;
-    background: rgba(79,206,138,0.1);
-    border: 1px solid rgba(79,206,138,0.3);
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 18px;
-    animation: stepIn 0.4s ease-out;
-  }
-  .conclusion-list { margin-bottom: 16px; }
-  .conclusion-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: var(--text-dim);
-    padding: 9px 0;
-    border-bottom: 1px solid var(--border);
-    opacity: 0;
-    transform: translateX(-8px);
-    animation: itemIn 0.4s ease-out forwards;
-  }
-  .conclusion-item:last-child { border-bottom: none; }
-  #cItem1 { animation-delay: 0.2s; }
-  #cItem2 { animation-delay: 0.9s; }
-  #cItem3 { animation-delay: 1.6s; }
-  @keyframes itemIn {
-    to { opacity: 1; transform: translateX(0); }
-  }
-  .c-check {
-    color: #4fce8a;
-    font-weight: 700;
-    font-size: 13px;
-  }
-  .conclusion-note {
-    text-align: center;
-    font-size: 12.5px;
-    color: var(--text-faint);
-    line-height: 1.5;
-    opacity: 0;
-    animation: itemIn 0.5s ease-out 2.2s forwards;
-  }
-  .report-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 4px;
-  }
-
-  .compare-block { margin: 4px 0 20px; }
-
-  .teaser-block { margin: 4px 0 14px; }
-  .teaser-line {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  .teaser-line strong { color: var(--text); font-size: 17px; }
-  .teaser-line.dim { color: var(--text-dim); font-size: 13.5px; }
-  .masked {
-    display: inline-block;
-    filter: blur(4px);
-    user-select: none;
-    color: var(--accent);
-  }
-
-  .shock-line {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text);
-    background: var(--surface-2);
-    border-left: 2px solid var(--restricted);
-    border-radius: 4px;
-    padding: 12px 14px;
-    margin-bottom: 18px;
-  }
-
-  .partial-reveal {
-    text-align: center;
-    margin-bottom: 4px;
-    padding: 18px 0 6px;
-  }
-  .partial-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 8px;
-  }
-  .partial-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    font-size: 40px;
-    color: var(--accent);
-    letter-spacing: 0.01em;
-  }
-  .partial-value .blur-digit {
-    filter: blur(7px);
-    display: inline-block;
-  }
-
-  .solution-block {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 18px;
-    margin: 4px 0 18px;
-  }
-  .solution-header {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-  .solution-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.5;
-    padding: 5px 0;
-  }
-
-  .includes-list {
-    text-align: left;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 16px;
-  }
-  .includes-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-faint);
-    margin-bottom: 8px;
-  }
-  .includes-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 12.5px;
-    color: var(--text-dim);
-    line-height: 1.5;
-    padding: 4px 0;
-  }
-  .includes-item .c-check { color: #4fce8a; }
-  .compare-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-  .compare-row .who { font-size: 12.5px; color: var(--text-dim); }
-  .compare-row .val { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; }
-  .compare-bar-track { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
-  .compare-bar-fill { height: 100%; border-radius: 4px; transition: width 1s cubic-bezier(.2,.8,.2,1); }
-  .compare-bar-fill.current { background: var(--text-faint); }
-  .compare-bar-fill.recommended { background: linear-gradient(90deg, var(--accent), #f4c07a); }
-
-  .gap-line {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--text-dim);
-    background: var(--surface-2);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 18px;
-  }
-  .gap-line strong { color: var(--accent); }
-
-  .metric-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .metric-card {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-  }
-  .metric-card .label { font-size: 10.5px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .metric-card .value { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; }
-
-  /* ---------- restricted / locked ---------- */
-  .restricted-section { position: relative; margin-top: 4px; }
-
-  .restricted-header {
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 12px;
-  }
-  .restricted-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--restricted);
-    background: var(--restricted-dim);
-    border: 1px solid rgba(226,87,76,0.35);
-    border-radius: 5px;
-    padding: 4px 9px;
-    animation: tagDrop 0.5s cubic-bezier(.2,.85,.25,1.25) forwards;
-  }
-  @keyframes tagDrop {
-    0%   { transform: translateY(-40px) scale(1.3); opacity: 0; }
-    60%  { transform: translateY(0) scale(1.04); opacity: 1; }
-    100% { transform: translateY(0) scale(1); }
-  }
-  .restricted-line { flex: 1; height: 1px; background: var(--border); }
-
-  .restricted-content {
-    filter: blur(6px);
-    user-select: none;
-    pointer-events: none;
-  }
-
-  .unlock-card {
-    margin-top: 16px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 20px 18px;
-    text-align: center;
-  }
-  .unlock-card p {
-    font-size: 12.5px;
-    color: var(--text-dim);
-    line-height: 1.55;
-    margin-bottom: 16px;
-  }
-  .email-row { margin-bottom: 10px; }
-  .email-row input {
-    width: 100%;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13.5px;
-    color: var(--text);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-    outline: none;
-    text-align: center;
-  }
-  .email-row input:focus { border-color: var(--accent); }
-  .email-error { font-size: 11.5px; color: var(--restricted); font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; }
-
-  .unlock-btn {
-    width: 100%;
-    font-family: 'Inter', sans-serif;
-    font-size: 14.5px; font-weight: 700;
-    color: #1a1206;
-    background: linear-gradient(180deg, #f0b358, var(--accent));
-    border: none; border-radius: 10px;
-    padding: 15px; cursor: pointer;
-    box-shadow: 0 8px 24px rgba(232,162,61,0.25);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .unlock-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(232,162,61,0.32); }
-  .unlock-btn:active { transform: translateY(0); }
-
-  .price-line { font-size: 11px; color: var(--text-faint); margin-top: 10px; line-height: 1.5; }
-  .price-line strong { color: var(--text-dim); }
-
-  .footer-note {
-    max-width: 460px; margin: 22px auto 0;
-    text-align: center; font-size: 12px; color: var(--text-faint); line-height: 1.6;
-  }
-
-  .hidden { display: none; }
-
-  @media (max-width: 380px) {
-    .metric-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .panel { padding: 22px 18px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .step, .analysis-log div, .restricted-tag, .scan-ring { animation: none; }
-  }
-</style>
 </head>
 <body>
 
-<div class="intro">
-  <div class="eyebrow">Sistema de auditoría financiera</div>
-  <h1>Descubre cuánto dinero estás perdiendo sin saberlo</h1>
-  <p>Analizamos tu estructura de ingresos, gastos y tiempo facturable para calcular tu tarifa mínima sostenible — y cuánto te cuesta cobrar por debajo de ella.</p>
-</div>
-
-<div class="panel-wrap">
-  <div class="panel">
-    <div class="panel-header">
-      <div class="brand">TARIFA<span>·</span>REAL</div>
-      <div class="id mono" id="reportId"></div>
-    </div>
-
-    <!-- QUIZ -->
-    <div id="quizState">
-      <div class="progress-label">
-        <span id="progressLabel">Punto 1 de 7</span>
-        <span id="progressPercent">0%</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-msg" id="progressMsg"></div>
-      <div class="step" id="stepContainer"></div>
-      <div class="trust-row">
-        <span>✔ Proceso seguro</span><span>✔ Datos protegidos</span><span>✔ Análisis personalizado</span>
-      </div>
-    </div>
-
-    <div class="step-check" id="stepCheck">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#4fce8a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-
-    <!-- ANALYSIS SEQUENCE -->
-    <div id="analysisState" class="hidden">
-      <div class="scan-ring"></div>
-      <div class="analysis-stage mono"><span id="stageText">Iniciando...</span><span class="cursor">▍</span></div>
-      <div class="progress-track"><div class="progress-fill" id="analysisFill"></div></div>
-      <div class="analysis-log mono" id="analysisLog"></div>
-    </div>
-
-    <!-- CONCLUSION MOMENT -->
-    <div id="conclusionState" class="hidden">
-      <div class="conclusion-badge">Análisis concluido</div>
-      <div class="conclusion-list">
-        <div class="conclusion-item" id="cItem1"><span class="c-check">✔</span> Perfil analizado</div>
-        <div class="conclusion-item" id="cItem2"><span class="c-check">✔</span> Criterios verificados</div>
-        <div class="conclusion-item" id="cItem3"><span class="c-check">✔</span> Resultado preparado</div>
-      </div>
-      <div class="conclusion-note">Encontramos información relevante con base en lo que compartiste.</div>
-    </div>
-
-    <!-- REPORT -->
-    <div id="resultState" class="hidden">
-      <div class="report-tag">Auditoría completada</div>
-
-      <div class="teaser-block">
-        <div class="teaser-line">Hoy cobras <strong id="valActual">$0/h</strong></div>
-        <div class="teaser-line dim">Tu tarifa mínima sostenible es <span class="masked">$•••</span>/h</div>
-      </div>
-
-      <div class="shock-line" id="shockLine"></div>
-
-      <div class="partial-reveal">
-        <div class="partial-label">Pérdida acumulada detectada</div>
-        <div class="partial-value" id="partialValue">$•,•••</div>
-      </div>
-
-      <div class="solution-block">
-        <div class="solution-header">A partir de hoy, esto cambia</div>
-        <div class="solution-item"><span class="c-check">✔</span> Tu tarifa mínima exacta, calculada con tus propios números</div>
-        <div class="solution-item"><span class="c-check">✔</span> Cuánto te cuesta cada mes seguir cobrando como hoy</div>
-        <div class="solution-item"><span class="c-check">✔</span> Tu proyección real a 1 y 5 años si nada cambia</div>
-        <div class="solution-item"><span class="c-check">✔</span> Un número claro para dejar de dudar la próxima vez que cotices</div>
-      </div>
-
-      <div class="restricted-section">
-        <div class="restricted-header">
-          <span class="restricted-tag">Informe reservado</span>
-          <div class="restricted-line"></div>
+  <div class="quiz-intro" id="quizIntro">
+    <span class="quiz-deco d1" style="top:8%;left:6%;">⭐</span>
+    <span class="quiz-deco d2" style="top:14%;right:8%;">☁️</span>
+    <span class="quiz-deco d3" style="bottom:12%;left:10%;">📚</span>
+    <span class="quiz-deco d4" style="bottom:18%;right:12%;">✨</span>
+    <span class="quiz-deco d5" style="top:40%;left:4%;">💡</span>
+    <div class="quiz-intro-inner">
+      <div class="quiz-intro-badge">🌟 Mentes Brillantes™</div>
+      <div class="quiz-card">
+        <div class="quiz-progress">
+          <span class="quiz-dot active" data-dot="1"></span>
+          <span class="quiz-dot" data-dot="2"></span>
+          <span class="quiz-dot" data-dot="3"></span>
+          <span class="quiz-dot" data-dot="4"></span>
+          <span class="quiz-dot" data-dot="5"></span>
         </div>
 
-        <div class="restricted-content" id="restrictedContent">
-          <div class="compare-block">
-            <div class="compare-row"><span class="who">Hoy cobras</span><span class="val" id="valActual2">$0/h</span></div>
-            <div class="compare-bar-track"><div class="compare-bar-fill current" id="barActual" style="width:0%"></div></div>
-            <div class="compare-row"><span class="who">Tarifa mínima sostenible</span><span class="val" id="valRecomendada">$0/h</span></div>
-            <div class="compare-bar-track"><div class="compare-bar-fill recommended" id="barRecomendada" style="width:0%"></div></div>
+        <div class="quiz-step" data-step="1">
+          <h3>¿Qué edad tiene tu hijo?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-q="edad" data-value="3 a 5 años">👶 3 a 5 años</button>
+            <button class="quiz-opt" data-q="edad" data-value="6 a 8 años">🧒 6 a 8 años</button>
+            <button class="quiz-opt" data-q="edad" data-value="9 a 12 años">🧑 9 a 12 años</button>
           </div>
-          <div class="gap-line" id="gapLine"></div>
-          <div class="metric-grid">
-            <div class="metric-card"><div class="label">Pérdida / hora</div><div class="value" id="mHora">$0</div></div>
-            <div class="metric-card"><div class="label">Pérdida diaria</div><div class="value" id="mDia">$0</div></div>
-            <div class="metric-card"><div class="label">Pérdida semanal</div><div class="value" id="mSemana">$0</div></div>
-            <div class="metric-card"><div class="label">Pérdida mensual</div><div class="value" id="mMes">$0</div></div>
-            <div class="metric-card"><div class="label">Pérdida desde enero</div><div class="value" id="mEnero">$0</div></div>
-            <div class="metric-card"><div class="label">Proyección a 5 años</div><div class="value" id="m5anos">$0</div></div>
-          </div>
-          <div class="gap-line" id="diasLine"></div>
         </div>
 
-        <div class="unlock-card">
-          <p>Tu informe completo ya está calculado — con el número exacto de lo que estás perdiendo y la tarifa que debes cobrar desde hoy. Se libera al confirmar, y también te lo enviamos a tu correo.</p>
-          <div class="includes-list">
-            <div class="includes-title">Tu informe completo incluye</div>
-            <div class="includes-item"><span class="c-check">✔</span> Tu tarifa mínima exacta por hora y por proyecto</div>
-            <div class="includes-item"><span class="c-check">✔</span> Comparativa completa: hoy vs. lo que deberías cobrar</div>
-            <div class="includes-item"><span class="c-check">✔</span> Pérdida real: por hora, día, semana, mes y año</div>
-            <div class="includes-item"><span class="c-check">✔</span> Proyección a 5 años si tu tarifa no cambia</div>
+        <div class="quiz-step" data-step="2" hidden>
+          <h3>¿Qué te gustaría mejorar en él o ella?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-q="meta" data-value="errores">😅 Manejar mejor los errores</button>
+            <button class="quiz-opt" data-q="meta" data-value="curiosidad">🌌 Estimular su curiosidad</button>
+            <button class="quiz-opt" data-q="meta" data-value="liderazgo">🚩 Desarrollar su liderazgo</button>
           </div>
-          <div class="email-row">
-            <input type="email" id="leadEmail" placeholder="tu@email.com" autocomplete="email">
-          </div>
-          <div class="email-error hidden" id="emailError">Ingresa un correo válido para continuar.</div>
-          <button class="unlock-btn" id="unlockBtn">Quiero saber cuánto estoy perdiendo</button>
-          <div class="price-line">Por <strong>$149 MXN</strong> ordenas tu tarifa hoy y dejas de perder dinero cada mes · se acredita si tu informe no revela ninguna pérdida real</div>
         </div>
+
+        <div class="quiz-step" data-step="3" hidden>
+          <h3>¿Cuánto tiempo pasa en pantallas al día?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-q="pantalla" data-value="poco">🟢 Menos de 1 hora</button>
+            <button class="quiz-opt" data-q="pantalla" data-value="medio">🟡 1 a 3 horas</button>
+            <button class="quiz-opt" data-q="pantalla" data-value="mucho">🔴 Más de 3 horas</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="4" hidden>
+          <h3>¿Con qué frecuencia le cuesta manejar la frustración?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-q="frustracion" data-value="nunca">😌 Casi nunca</button>
+            <button class="quiz-opt" data-q="frustracion" data-value="aveces">😐 A veces</button>
+            <button class="quiz-opt" data-q="frustracion" data-value="seguido">😣 Bastante seguido</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="5" hidden>
+          <h3>¿Cómo prefieren leer en casa?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-q="lectura" data-value="juntos">👨‍👩‍👧 En familia, juntos</button>
+            <button class="quiz-opt" data-q="lectura" data-value="solo">📖 Que lea solo/a</button>
+            <button class="quiz-opt" data-q="lectura" data-value="ambos">🔄 Un poco de los dos</button>
+          </div>
+        </div>
+
+        <div class="quiz-result" data-step="result" hidden>
+          <div class="quiz-result-icon">🎉</div>
+          <h3>¡Encontramos el sistema perfecto!</h3>
+          <p id="quizResultText"></p>
+          <button class="cta" id="quizContinueBtn" type="button">VER MI RECOMENDACIÓN →</button>
+        </div>
+      </div>
+      <button class="quiz-skip" id="quizSkipBtn" type="button">Saltar por ahora →</button>
+    </div>
+  </div>
+
+  <div class="portal-transition" id="portalTransition">
+    <span class="portal-star" style="top:20%;left:15%;">⭐</span>
+    <span class="portal-star" style="top:30%;right:18%;">✨</span>
+    <span class="portal-star" style="bottom:25%;left:22%;">🌟</span>
+    <span class="portal-star" style="bottom:35%;right:12%;">⭐</span>
+    <span class="portal-star" style="top:50%;left:50%;">✨</span>
+  </div>
+
+
+  <div class="bg-pattern"></div>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="cartDrawer">
+    <div class="drawer-head">Tu carrito <button class="drawer-close" id="drawerClose">×</button></div>
+    <div class="drawer-body">
+      <div class="upsell-item">
+        <div class="ph-img">📚</div>
+        <div class="meta">Mentes Brillantes™ 3X1<small>$5.00</small></div>
+      </div>
+    </div>
+    <div class="drawer-foot">
+      <div class="subtotal"><span>Subtotal</span><span>$5.00</span></div>
+      <a href="#" class="cta js-open-checkout">FINALIZAR COMPRA →</a>
+    </div>
+  </div>
+
+  <div class="checkout-modal-overlay" id="checkoutOverlay"></div>
+  <div class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-label="Resumen del pedido">
+    <span class="co-deco cd1">⭐</span>
+    <span class="co-deco cd2">✨</span>
+    <span class="co-deco cd3">🌟</span>
+    <button class="checkout-modal-close" id="checkoutModalClose" aria-label="Cerrar">×</button>
+
+    <div class="co-reassure">🔒 Estás a un paso — compra 100% segura</div>
+
+    <div class="co-covers">
+      <img src="images/murphy.png" alt="Ley de Murphy">
+      <img src="images/porques.png" alt="El Gran Libro de los Porqués">
+      <img src="images/lideres.png" alt="Pequeños Líderes">
+    </div>
+    <h1 class="co-h1">Sistema de Aprendizaje 3X1</h1>
+    <p class="co-sub">Confirmá tu pedido para recibir los 3 libros al instante</p>
+
+    <ul class="co-includes">
+      <li>⚡ Ley de Murphy — módulo principal</li>
+      <li>🌌 El Gran Libro de los Porqués — de regalo</li>
+      <li>🚩 Pequeños Líderes — de regalo</li>
+      <li>♾️ Acceso de por vida + actualizaciones futuras</li>
+    </ul>
+
+    <div class="co-total">
+      <span class="lbl">Total a pagar hoy</span>
+      <span><span class="old">$22.00</span> &nbsp; <span class="now">$5.00</span></span>
+    </div>
+
+    <div class="co-trust">
+      <span>🔒 Pago 100% seguro</span>
+      <span>⚡ Entrega instantánea</span>
+      <span>📱 Cualquier dispositivo</span>
+      <span>↩️ Garantía 30 días</span>
+    </div>
+
+    <a href="https://checkoutkupfy.com/checkout/cmsc53tmu09qm01om63j3rvk7?offer=AZT6DG3" class="co-cta" id="checkoutCta">CONFIRMAR Y PAGAR DE FORMA SEGURA →</a>
+    <p class="co-microcopy">Vas a completar el pago en un entorno 100% seguro. Los libros llegan a tu mail apenas se confirme.</p>
+  </div>
+
+  <div class="top-bar wrap" style="max-width:820px;">
+    <span class="brand">🌟 Mentes Brillantes™</span>
+    <button class="cart-btn" id="cartOpen">🛒 Carrito <span class="cart-count">1</span></button>
+  </div>
+
+  <div class="ribbon">
+    <div class="track">
+      <div class="seg">
+        <span>🧠 CIENCIA Y CURIOSIDAD PARA CHICOS</span>
+        <span>🎁 HOY 3X1</span>
+        <span>📩 ENTREGA INSTANTÁNEA POR MAIL</span>
+        <span>🔒 PAGO 100% SEGURO</span>
+        <span>↩️ GARANTÍA DE 30 DÍAS</span>
+        <span>🖨️ IMPRIMIBLE EN CASA</span>
+        <span>📱 CUALQUIER DISPOSITIVO</span>
+      </div>
+      <div class="seg" aria-hidden="true">
+        <span>🧠 CIENCIA Y CURIOSIDAD PARA CHICOS</span>
+        <span>🎁 HOY 3X1</span>
+        <span>📩 ENTREGA INSTANTÁNEA POR MAIL</span>
+        <span>🔒 PAGO 100% SEGURO</span>
+        <span>↩️ GARANTÍA DE 30 DÍAS</span>
+        <span>🖨️ IMPRIMIBLE EN CASA</span>
+        <span>📱 CUALQUIER DISPOSITIVO</span>
       </div>
     </div>
   </div>
-</div>
 
-<div class="footer-note">
-  Este informe se calcula a partir de la información que proporcionas. No sustituye asesoría contable o financiera profesional.
-</div>
+  <div class="hero">
+    <span class="hero-deco float-a twinkle" style="top:14%;left:6%;">⭐</span>
+    <span class="hero-deco float-b" style="top:22%;right:8%;">☁️</span>
+    <span class="hero-deco float-a" style="top:60%;left:4%;">📚</span>
+    <span class="hero-deco float-b twinkle" style="top:70%;right:6%;">✨</span>
+    <span class="hero-deco float-a" style="top:8%;right:22%;font-size:22px;">🎈</span>
+    <span class="hero-deco float-b" style="bottom:6%;left:20%;font-size:22px;">🚀</span>
+    <span class="hero-deco float-a twinkle" style="top:40%;left:11%;font-size:20px;">🧩</span>
+    <span class="hero-deco float-b" style="top:16%;left:38%;font-size:18px;">💡</span>
+    <span class="hero-deco float-a" style="bottom:14%;right:16%;font-size:20px;">✏️</span>
 
-<script>
-  const CHECKOUT_URL = "https://pay.hotmart.com/B107028231V?checkoutMode=10";
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/REEMPLAZA-CON-TU-ID/exec";
+    <div class="wrap">
+      <div class="badge">🌟 Sistema de Aprendizaje Mentes Brillantes™</div>
+      <div class="quiz-personal-banner" id="quizPersonalBanner" hidden></div>
+      <h1 class="headline">Dale a tu hijo <span class="hl">una ventaja para toda la vida</span>, aprendiendo mientras se divierte</h1>
+      <p class="sub">Un sistema completo de 3 libros digitales, pensado por especialistas en desarrollo infantil, para que tu hijo de 3 a 12 años pierda el miedo a equivocarse, entienda el mundo que lo rodea, y se anime a liderar con el ejemplo.</p>
 
-  document.getElementById("reportId").textContent = "ID-" + Math.floor(100000 + Math.random()*900000);
+      <div class="above-fold-trust">
+        <span>⭐⭐⭐⭐⭐ 4.9/5</span>
+        <span>👨‍👩‍👧 +3.200 familias felices</span>
+        <span>⚡ Acceso instantáneo</span>
+        <span>📱 Funciona en cualquier dispositivo</span>
+        <span>♾️ Acceso de por vida</span>
+        <span>🔒 Pago 100% seguro</span>
+        <span>↩️ Garantía de devolución</span>
+      </div>
 
-  const QUESTIONS = [
-    { id: "I",  q: "¿Cuánto quieres ganar neto al mes?", hint: "Lo que necesitas que quede disponible después de gastos e impuestos.", prefix: "$", suffix: "MXN / mes", default: 30000 },
-    { id: "G",  q: "¿Cuánto gastas al mes solo para operar?", hint: "Software, herramientas, internet, espacio de trabajo.", prefix: "$", suffix: "MXN / mes", default: 2000 },
-    { id: "T",  q: "¿Qué porcentaje reservas para impuestos?", hint: "Usa un estimado si no llevas el cálculo exacto.", prefix: "", suffix: "%", default: 15 },
-    { id: "D",  q: "¿Cuántos días hábiles tiene tu mes?", hint: "Déjalo en 22 si no estás seguro.", prefix: "", suffix: "días", default: 22 },
-    { id: "V",  q: "¿Cuántos de esos días no facturas?", hint: "Imprevistos, feriados, días sin clientes.", prefix: "", suffix: "días", default: 4 },
-    { id: "H",  q: "¿Cuántas horas al día realmente facturas?", hint: "Sin reuniones, propuestas ni tareas administrativas.", prefix: "", suffix: "horas", default: 4 },
-    { id: "Ta", q: "¿Cuánto cobras hoy por hora?", hint: "Tu tarifa actual, aunque no sea fija.", prefix: "$", suffix: "MXN/h", default: 150 }
-  ];
+      <div class="hero-gallery">
+        <div class="hg-main"><img src="images/grupo-3x1.png" alt="Colección 3X1 Mentes Brillantes"></div>
+        <div class="hg-sub">
+          <img src="images/grupo-precio.png" alt="Ley de Murphy + 2 libros de regalo">
+          <img src="images/lifestyle-mama-hijo.jpg" alt="Mamá y su hijo leyendo juntos">
+        </div>
+      </div>
 
-  const ANALYSIS_STAGES = [
-    "Sincronizando información...",
-    "Comparando con estructuras similares...",
-    "Calculando costo operativo...",
-    "Analizando margen financiero...",
-    "Detectando pérdidas ocultas...",
-    "Calculando tarifa sostenible...",
-    "Estimando pérdida anual...",
-    "Generando informe...",
-    "Finalizando auditoría..."
-  ];
+      <div class="mini-reviews">
+        <span class="stars-inline">★★★★★</span> 4.9/5 · +3.200 familias
+      </div>
 
-  const answers = {};
-  let current = 0;
-  let lastResult = {};
+      <div class="price-card">
+        <div class="offer-reason">🎉 Oferta de lanzamiento — por tiempo limitado</div>
+        <div class="row"><span>Precio normal</span><span style="text-decoration:line-through;color:var(--muted);">$22.00</span></div>
+        <div class="row"><span>Hoy en el 3X1</span><span>$5.00</span></div>
+        <div class="row total"><span>Vos pagás</span><span>$5.00 (-77%)</span></div>
+      </div>
+      <p class="value-line">Menos que un café ☕ — pero puede ser el empujón que le cambie el futuro a tu hijo.</p>
 
-  function fmt(n){ return "$" + Math.round(n).toLocaleString("es-MX"); }
+      <a href="#" class="cta js-open-checkout">QUIERO DARLE ESTA VENTAJA →</a>
+      <p class="microcopy">📩 Los recibís por mail en PDF, al instante.</p>
+      <div class="mini-trust-row">
+        <span>🔒 Pago 100% seguro</span>
+        <span>⚡ Acceso instantáneo</span>
+        <span>↩️ Garantía 30 días</span>
+        <span>📱 Se lee en celular, tablet o PC</span>
+      </div>
+    </div>
+  </div>
 
-  // ================= AUDIO (opcional, minimalista) =================
-  let audioCtx = null;
-  function tick(freq){
-    try {
-      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type = "sine"; o.frequency.value = freq || 720;
-      g.gain.setValueAtTime(0.05, audioCtx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.08);
-      o.connect(g); g.connect(audioCtx.destination);
-      o.start(); o.stop(audioCtx.currentTime + 0.08);
-    } catch(e) {}
-  }
+  <div class="wave" style="margin-top:-2px;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,32 C240,60 480,0 720,20 C960,40 1200,60 1440,24 L1440,60 L0,60 Z" fill="#EAFBF0"/></svg>
+  </div>
 
-  // ================= COUNT-UP ANIMATION =================
-  function animateValue(el, to, formatFn, duration){
-    const start = performance.now();
-    const dur = duration || 900;
-    function frame(now){
-      const p = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = formatFn(to * eased);
-      if (p < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
+  <section style="background:var(--green-light);padding-top:36px;">
+    <div class="wrap fade-up">
+      <div class="section-caption">✨ Por qué las familias confían en nosotros</div>
+      <div class="trust-row">
+        <div class="trust-pill">⚡ Entrega inmediata</div>
+        <div class="trust-pill">🔒 Pago seguro (SSL)</div>
+        <div class="trust-pill">👨‍👩‍👧 Miles de familias</div>
+        <div class="trust-pill">📱 Celular, tablet o PC</div>
+        <div class="trust-pill">🖨️ Imprimible en casa</div>
+        <div class="trust-pill">🎓 Contenido educativo</div>
+        <div class="trust-pill">↩️ Garantía de 30 días</div>
+        <div class="trust-pill">♾️ Acceso de por vida</div>
+        <div class="trust-pill">🔁 Actualizaciones incluidas</div>
+        <div class="trust-pill">💬 Soporte por mail</div>
+      </div>
+    </div>
+  </section>
 
-  const PROGRESS_MESSAGES = [
-    "Comenzando tu análisis...",
-    "Organizando tu perfil...",
-    "Refinando tu análisis...",
-    "Comparando posibilidades...",
-    "Verificando criterios...",
-    "Ya casi. Falta poco.",
-    "Tu análisis está tomando forma..."
-  ];
-  const AFFIRMATIONS = ["Perfecto.", "Excelente.", "Muy bien.", "Correcto.", "Anotado.", "Listo."];
+  <div class="wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,28 C240,0 480,60 720,40 C960,20 1200,0 1440,36 L1440,60 L0,60 Z" fill="#EAFBF0" transform="scale(1,-1) translate(0,-60)"/></svg>
+  </div>
 
-  // ================= QUIZ RENDER =================
-  function renderStep(){
-    const item = QUESTIONS[current];
-    document.getElementById("progressLabel").textContent = "Punto " + (current + 1) + " de " + QUESTIONS.length;
-    document.getElementById("progressPercent").textContent = Math.round((current / QUESTIONS.length) * 100) + "%";
-    document.getElementById("progressFill").style.width = Math.round((current / QUESTIONS.length) * 100) + "%";
+  <section>
+    <div class="wrap fade-up">
+      <div class="section-caption">🧠 Por qué importa hacerlo ahora</div>
+      <div class="bundle-title"><h2>Lo que tu hijo aprende hoy, define quién va a ser mañana</h2></div>
+      <p class="bundle-sub">Entre los 3 y los 12 años se forman las bases emocionales y cognitivas que tu hijo va a llevar toda la vida: cómo maneja sus errores, cómo entiende el mundo que lo rodea, si se anima a liderar o se queda esperando que otro dé el primer paso. Esa ventana no se repite — y lo que le das hoy hace la diferencia.</p>
+      <div class="stat-row">
+        <div class="stat-pill">🧠 Bases emocionales de por vida</div>
+        <div class="stat-pill">⏳ Ventana clave: 3 a 12 años</div>
+        <div class="stat-pill">🚀 Hábitos que lo acompañan siempre</div>
+      </div>
 
-    const msgEl = document.getElementById("progressMsg");
-    msgEl.style.animation = "none"; void msgEl.offsetWidth;
-    msgEl.textContent = PROGRESS_MESSAGES[current] || "Continuando...";
-    msgEl.style.animation = "";
+      <div class="before-after">
+        <div class="ba-col ba-before">
+          <div class="ba-title">😕 Sin herramientas</div>
+          <ul>
+            <li>Demasiado tiempo de pantalla</li>
+            <li>Le cuesta manejar la frustración</li>
+            <li>Poca curiosidad por aprender</li>
+            <li>Le da miedo intentar cosas nuevas</li>
+          </ul>
+        </div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-col ba-after">
+          <div class="ba-title">🌟 Con Mentes Brillantes™</div>
+          <ul>
+            <li>Momentos de lectura en familia</li>
+            <li>Aprende a manejar sus errores</li>
+            <li>Curiosidad y ganas de aprender</li>
+            <li>Más confianza para animarse</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    const isLast = current === QUESTIONS.length - 1;
-    const existingValue = answers[item.id] !== undefined ? answers[item.id] : item.default;
+  <div class="wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,32 C240,60 480,0 720,20 C960,40 1200,60 1440,24 L1440,60 L0,60 Z" fill="#EAFBF0"/></svg>
+  </div>
 
-    document.getElementById("stepContainer").innerHTML =
-      '<div class="step-question">' + item.q + '</div>' +
-      '<div class="step-input-row">' +
-        (item.prefix ? '<span class="prefix">' + item.prefix + '</span>' : '') +
-        '<input type="number" id="stepInput" value="' + existingValue + '" inputmode="decimal">' +
-        '<span class="suffix">' + item.suffix + '</span>' +
-      '</div>' +
-      '<div class="step-hint">' + item.hint + '</div>' +
-      '<div class="affirm-toast" id="affirmToast"></div>' +
-      '<div class="step-nav">' +
-        (current > 0 ? '<button class="btn btn-ghost" id="backBtn">Atrás</button>' : '') +
-        '<button class="btn btn-primary" id="nextBtn">' + (isLast ? "Analizar mi información" : "Siguiente") + '</button>' +
-      '</div>';
+  <section id="oferta" style="background:var(--green-light);">
+    <div class="wrap fade-up">
+      <div class="bundle-title"><h2>Qué incluye tu 3X1</h2></div>
+      <p class="bundle-sub">Un solo pago, tres libros trabajando juntos: uno para aprender de los errores, uno para saciar la curiosidad, y uno para animarse a liderar.</p>
 
-    const input = document.getElementById("stepInput");
-    input.focus(); input.select();
+      <div class="bundle-grid">
+        <div class="book-card">
+          <div class="card-badge bestseller">MÁS VENDIDO</div>
+          <div class="book-cover"><img src="images/murphy.png" alt="Ley de Murphy"></div>
+          <div class="num">Módulo 1 · Principal</div>
+          <h3>⚡ Ley de Murphy</h3>
+          <p>Cuando algo sale mal, ahí está el aprendizaje más grande. Historias con humor para que tu hijo pierda el miedo a equivocarse y se anime a probar de nuevo.</p>
+          <ul class="feature-list">
+            <li>Convierte los errores en aprendizaje</li>
+            <li>Fomenta la curiosidad científica</li>
+            <li>Historias cortas y divertidas</li>
+            <li>Acceso inmediato en PDF</li>
+          </ul>
+          <div class="mini-caption">📖 32 páginas · 🖨️ Imprimible · ♾️ Acceso de por vida</div>
+        </div>
+        <div class="book-card">
+          <div class="card-badge bonus">BONUS</div>
+          <div class="book-cover"><img src="images/porques.png" alt="El Gran Libro de los Porqués"></div>
+          <div class="num">Módulo 2 · Regalo</div>
+          <h3>🌌 El Gran Libro de los Porqués</h3>
+          <p>Respuestas simples y divertidas a las mil preguntas que tu hijo hace todos los días — del cuerpo humano al espacio.</p>
+          <ul class="feature-list">
+            <li>Más de 3.000 ilustraciones</li>
+            <li>Cuerpo humano, animales, espacio y más</li>
+            <li>Responde el "¿por qué?" de cada día</li>
+            <li>Ideal para mentes curiosas</li>
+          </ul>
+          <div class="mini-caption">📖 40 páginas · 🖨️ Imprimible · ♾️ Acceso de por vida</div>
+        </div>
+        <div class="book-card">
+          <div class="card-badge bonus">BONUS</div>
+          <div class="book-cover"><img src="images/lideres.png" alt="Pequeños Líderes"></div>
+          <div class="num">Módulo 3 · Regalo</div>
+          <h3>🚩 Pequeños Líderes</h3>
+          <p>Pequeñas acciones, grandes cambios: historias que enseñan a tu hijo a tomar la iniciativa, trabajar en equipo y dar el ejemplo.</p>
+          <ul class="feature-list">
+            <li>Enseña a tomar la iniciativa</li>
+            <li>Fomenta el trabajo en equipo</li>
+            <li>Historias inspiradoras</li>
+            <li>Valores para la vida real</li>
+          </ul>
+          <div class="mini-caption">📖 28 páginas · 🖨️ Imprimible · ♾️ Acceso de por vida</div>
+        </div>
+      </div>
 
-    document.getElementById("nextBtn").addEventListener("click", handleNext);
-    input.addEventListener("keydown", function(e){ if (e.key === "Enter") handleNext(); });
+      <div class="value-stack">
+        <div class="vs-row"><span>📘 Ley de Murphy <em>(módulo principal)</em></span><span>$9.00</span></div>
+        <div class="vs-row"><span>🌌 El Gran Libro de los Porqués <em>(bonus)</em></span><span>$7.00</span></div>
+        <div class="vs-row"><span>🚩 Pequeños Líderes <em>(bonus)</em></span><span>$6.00</span></div>
+        <div class="vs-row"><span>♾️ Acceso de por vida + actualizaciones</span><span>$5.00</span></div>
+        <div class="vs-row total"><span>Valor total</span><span style="text-decoration:line-through;">$27.00</span></div>
+        <div class="vs-row today"><span>Precio de hoy</span><span>$5.00</span></div>
+      </div>
 
-    const backBtn = document.getElementById("backBtn");
-    if (backBtn) backBtn.addEventListener("click", function(){ current--; renderStep(); });
-  }
+      <div class="stat-row">
+        <div class="stat-pill">📚 3 libros digitales</div>
+        <div class="stat-pill">📩 Entrega inmediata</div>
+        <div class="stat-pill">🖨️ Imprimible</div>
+        <div class="stat-pill">📱 Cualquier dispositivo</div>
+      </div>
+    </div>
+  </section>
 
-  function showCheckBurst(){
-    const check = document.getElementById("stepCheck");
-    check.classList.remove("show"); void check.offsetWidth;
-    check.classList.add("show");
-  }
+  <section style="background:var(--green-light);">
+    <div class="wrap fade-up">
+      <div class="bundle-title"><h2>📩 ¿Cómo lo recibo?</h2></div>
+      <p class="bundle-sub">Apenas comprás, te llega un mail con los 3 libros en PDF al instante.</p>
+      <div class="delivery-img">
+        <img src="images/entrega-3-pasos.jpg" alt="Entrega digital en 3 pasos: comprás, te llega por mail, lo imprimís o lo leés en pantalla">
+      </div>
+    </div>
+  </section>
 
-  function handleNext(){
-    const item = QUESTIONS[current];
-    const val = parseFloat(document.getElementById("stepInput").value) || 0;
-    answers[item.id] = val;
-    tick(680);
+  <section>
+    <div class="wrap">
+      <div class="img-block fade-up">
+        <div class="ph-img has-img"><img src="images/lifestyle-inventor.jpg" alt="Niño inventando y probando ideas"></div>
+        <div>
+          <div class="eyebrow">⚡ Aprender del error</div>
+          <h3>Que pierda el miedo a equivocarse</h3>
+          <p>Con humor y personajes entrañables, tu hijo entiende que cada error es un paso más para aprender — no algo de qué avergonzarse.</p>
+          <ul class="feature-list">
+            <li>Reduce la frustración ante el error</li>
+            <li>Enseña a probar de nuevo</li>
+            <li>Desarrolla el pensamiento científico</li>
+          </ul>
+        </div>
+      </div>
+      <div class="img-block fade-up">
+        <div class="ph-img has-img"><img src="images/lifestyle-curiosidad.jpg" alt="Niño leyendo rodeado de íconos de curiosidad: espacio, animales, cuerpo humano"></div>
+        <div>
+          <div class="eyebrow">🌌 Curiosidad</div>
+          <h3>Que encuentre respuesta a sus mil preguntas</h3>
+          <p>Un libro pensado para chicos curiosos, con explicaciones simples sobre el cuerpo humano, los animales, el espacio y mucho más.</p>
+          <ul class="feature-list">
+            <li>Más de 3.000 ilustraciones</li>
+            <li>Explicaciones simples y claras</li>
+            <li>Estimula las ganas de aprender</li>
+          </ul>
+        </div>
+      </div>
+      <div class="img-block fade-up">
+        <div class="ph-img has-img"><img src="images/lifestyle-lider.jpg" alt="Niño presentando sus ideas a un grupo de chicos"></div>
+        <div>
+          <div class="eyebrow">🚩 Liderazgo</div>
+          <h3>Que se anime a dar el primer paso</h3>
+          <p>Historias de personajes que enseñan que no hace falta ser grande para liderar: alcanza con dar el ejemplo y trabajar en equipo.</p>
+          <ul class="feature-list">
+            <li>Fomenta la iniciativa propia</li>
+            <li>Enseña a trabajar en equipo</li>
+            <li>Valores para la vida real</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Refuerzo positivo inmediato + micro-vibración visual antes de avanzar
-    const panel = document.querySelector(".panel");
-    panel.classList.remove("pulse-confirm"); void panel.offsetWidth;
-    panel.classList.add("pulse-confirm");
+  <section>
+    <div class="mission-wrap fade-up">
+      <div class="blob"></div>
+      <div class="wrap">
+        <div class="mission-img"><img src="images/lifestyle-cientifico.jpg" alt="Niño con bata de científico sosteniendo el libro Grandes Ideas"></div>
+        <div class="bundle-title"><h2>Ayudamos a tu hijo a crecer con más herramientas para la vida</h2></div>
+        <p class="bundle-sub" style="max-width:560px;">Los chicos son curiosos y llenos de energía, pero no siempre tienen las herramientas para animarse a probar, entender el mundo que los rodea o dar el primer paso. Por eso creamos esta colección.</p>
+        <div class="stat-row">
+          <div class="stat-pill">🎓 Contenido educativo</div>
+          <div class="stat-pill">🧩 Actividades prácticas</div>
+          <div class="stat-pill">❤️ Pensado para padres</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    const affirmEl = document.getElementById("affirmToast");
-    if (affirmEl) affirmEl.textContent = AFFIRMATIONS[current % AFFIRMATIONS.length];
-    showCheckBurst();
+  <section style="background:var(--green-light);">
+    <div class="wrap fade-up">
+      <div class="bundle-title"><h2>¿Qué va a aprender tu hijo?</h2></div>
+      <div class="check-grid">
+        <div class="check-chip"><span class="ico">⚡</span><div>A no tenerle miedo a los errores y aprender de ellos<span class="chip-sub">Más confianza para intentar cosas nuevas</span></div></div>
+        <div class="check-chip"><span class="ico">🌌</span><div>A entender el mundo que lo rodea<span class="chip-sub">Curiosidad y pensamiento científico</span></div></div>
+        <div class="check-chip"><span class="ico">🚩</span><div>A dar el primer paso y liderar con el ejemplo<span class="chip-sub">Iniciativa y trabajo en equipo</span></div></div>
+        <div class="check-chip"><span class="ico">✓</span><div>A expresar sus ideas con confianza<span class="chip-sub">Comunicación y autoestima</span></div></div>
+      </div>
+    </div>
+  </section>
 
-    const nextBtn = document.getElementById("nextBtn");
-    if (nextBtn) nextBtn.disabled = true;
+  <section>
+    <div class="wrap fade-up">
+      <div class="bundle-title"><h2>¿Para quién es ideal?</h2></div>
+      <div class="check-grid">
+        <div class="check-chip"><span class="ico">👦</span><div>Chicos de 3 a 12 años<span class="chip-sub">Lenguaje adaptado a cada edad</span></div></div>
+        <div class="check-chip"><span class="ico">👨‍👩‍👧</span><div>Padres que valoran la educación más allá de la escuela<span class="chip-sub">Herramientas para el día a día</span></div></div>
+        <div class="check-chip"><span class="ico">🏠</span><div>Familias que educan en casa<span class="chip-sub">Material listo para usar</span></div></div>
+        <div class="check-chip"><span class="ico">✓</span><div>Docentes y bibliotecas escolares<span class="chip-sub">Material listo para usar en el aula</span></div></div>
+      </div>
+    </div>
+  </section>
 
-    setTimeout(function(){
-      if (current === QUESTIONS.length - 1){
-        runAnalysis();
-      } else {
-        current++;
-        renderStep();
-      }
-    }, 420);
-  }
+  <section style="background:var(--green-light);">
+    <div class="wrap fade-up">
+      <div class="bundle-title"><h2>¿Por qué los padres eligen Mentes Brillantes™?</h2></div>
+      <div class="check-grid">
+        <div class="check-chip"><span class="ico">🎯</span><div>Enseña habilidades para la vida real<span class="chip-sub">No solo contenido escolar</span></div></div>
+        <div class="check-chip"><span class="ico">⚡</span><div>Entrega instantánea, sin esperas<span class="chip-sub">Por mail, en PDF</span></div></div>
+        <div class="check-chip"><span class="ico">🏆</span><div>Garantía de 30 días sin riesgo<span class="chip-sub">100% del dinero de vuelta</span></div></div>
+        <div class="check-chip"><span class="ico">✓</span><div>Ilustraciones que enamoran a los chicos<span class="chip-sub">Vuelven a pedir leerlo</span></div></div>
+      </div>
+    </div>
+  </section>
 
-  // ================= CINEMATIC ANALYSIS =================
-  function runAnalysis(){
-    document.getElementById("quizState").classList.add("hidden");
-    document.getElementById("analysisState").classList.remove("hidden");
+  <section>
+    <div class="wrap fade-up">
+      <div class="bundle-title"><h2>Reseñas reales</h2></div>
+      <div class="reviews-img">
+        <img src="images/testimonios-familias.jpg" alt="Reseñas reales de familias: Mariana G., Lucas R., Carolina M. y Diego S.">
+      </div>
+    </div>
+  </section>
 
-    const stageEl = document.getElementById("stageText");
-    const fillEl = document.getElementById("analysisFill");
-    const logEl = document.getElementById("analysisLog");
-    logEl.innerHTML = "";
+  <section>
+    <div class="wrap fade-up">
+      <div class="guarantee">
+        <div class="g-icon">↩</div>
+        <h3>Garantía de 30 días</h3>
+        <p>Si tu hijo no engancha con estos libros, escribinos dentro de los 30 días y te devolvemos el 100%. Sin vueltas.</p>
+        <ul class="feature-list" style="text-align:left;max-width:280px;margin:16px auto 0;">
+          <li>Sin preguntas complicadas</li>
+          <li>Reembolso completo</li>
+          <li>Compra 100% segura</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    let i = 0;
-    function nextStage(){
-      if (i > 0){
-        const prevLine = logEl.children[logEl.children.length - 1];
-        if (prevLine) prevLine.classList.add("done");
-      }
-      if (i >= ANALYSIS_STAGES.length){
-        setTimeout(showConclusion, 700);
-        return;
-      }
-      stageEl.textContent = ANALYSIS_STAGES[i];
-      fillEl.style.width = Math.round(((i + 1) / ANALYSIS_STAGES.length) * 100) + "%";
+  <section style="background:var(--green-light);">
+    <div class="wrap fade-up">
+      <div class="bundle-title"><h2>Preguntas frecuentes</h2></div>
+      <div style="margin-top:24px;">
+        <details open>
+          <summary>📦 ¿Qué incluye exactamente la oferta?</summary>
+          <p>Pagás un solo precio y recibís los 3 libros digitales: Ley de Murphy, El Gran Libro de los Porqués y Pequeños Líderes.</p>
+        </details>
+        <details>
+          <summary>📩 ¿Cómo los recibo?</summary>
+          <p>Apenas completás la compra te llega un mail con los 3 PDF. Los podés imprimir o leer desde el celular, tablet o computadora.</p>
+        </details>
+        <details>
+          <summary>💻 ¿Son físicos o digitales?</summary>
+          <p>Son 100% digitales (PDF). No hay envío ni tiempos de espera.</p>
+        </details>
+        <details>
+          <summary>👦 ¿Para qué edades son?</summary>
+          <p>Pensados para chicos de 3 a 12 años, con lenguaje y ejemplos que se adaptan a distintas edades dentro de ese rango.</p>
+        </details>
+        <details>
+          <summary>🔄 ¿Y si no le sirve a mi hijo?</summary>
+          <p>Tenés 30 días de garantía. Si no quedás conforme, te devolvemos el 100% del pago.</p>
+        </details>
+        <details>
+          <summary>🔒 ¿La compra es segura?</summary>
+          <p>Sí, el pago se procesa de forma segura y vas a recibir tus libros al instante apenas se confirme.</p>
+        </details>
+        <details>
+          <summary>🖨️ ¿Puedo imprimir los libros?</summary>
+          <p>Sí, los 3 libros vienen en PDF de alta calidad, listos para imprimir en casa las veces que quieras.</p>
+        </details>
+        <details>
+          <summary>♾️ ¿El acceso tiene vencimiento?</summary>
+          <p>No. Una vez que comprás, el acceso es de por vida — el material es tuyo para siempre, junto con futuras actualizaciones.</p>
+        </details>
+        <details>
+          <summary>🧠 ¿Necesito experiencia previa para usarlo con mi hijo?</summary>
+          <p>No, no hace falta ninguna preparación. Los libros están pensados para que cualquier padre o madre los use directamente con su hijo, sin pasos extra.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 
-      const line = document.createElement("div");
-      line.textContent = "> " + ANALYSIS_STAGES[i];
-      logEl.appendChild(line);
-      while (logEl.children.length > 4) logEl.removeChild(logEl.firstChild);
+  <footer>
+    Mentes Brillantes™ · Habilidades para la vida real.<br>
+    © Mentes Brillantes. Todos los derechos reservados.
+  </footer>
 
-      tick(520 + i * 30);
-      i++;
-      setTimeout(nextStage, 950 + Math.random() * 750);
-    }
-    nextStage();
-  }
+  <div class="sticky-bar">
+    <div class="info">$5.00 <small>antes $22.00 · 3X1 · 🔒 entrega instantánea</small></div>
+    <a href="#" class="cta secondary js-open-checkout">COMPRAR AHORA</a>
+  </div>
 
-  function showConclusion(){
-    document.getElementById("analysisState").classList.add("hidden");
-    document.getElementById("conclusionState").classList.remove("hidden");
-    tick(600);
-    setTimeout(function(){ tick(650); }, 900);
-    setTimeout(function(){ tick(700); }, 1600);
-    setTimeout(showResult, 3000);
-  }
-
-  // ================= RESULT CALC =================
-  function showResult(){
-    document.getElementById("conclusionState").classList.add("hidden");
-    document.getElementById("resultState").classList.remove("hidden");
-
-    const v = answers;
-    const bruto = (v.I + v.G) / (1 - Math.min(v.T,90)/100);
-    const diasFacturables = Math.max(v.D - v.V, 1);
-    const horas = Math.max(v.H, 0.1);
-    const tarifaHora = bruto / (diasFacturables * horas);
-    const diferenciaHora = tarifaHora - v.Ta;
-
-    const perdidaDiaria = diferenciaHora * horas;
-    const perdidaSemanal = perdidaDiaria * (diasFacturables / 4.33);
-    const perdidaMensual = diferenciaHora * diasFacturables * horas;
-    const perdidaAnual = perdidaMensual * 12;
-    const perdida5anos = perdidaAnual * 5;
-
-    const now = new Date();
-    const mesesDesdeEnero = Math.max(now.getMonth() + 1, 1);
-    const perdidaDesdeEnero = perdidaMensual * mesesDesdeEnero;
-
-    const ratio = v.Ta / Math.max(tarifaHora, 0.01);
-    const diasPagadosEquivalente = Math.max(diasFacturables * Math.min(ratio, 1), 0);
-    const diasSinCompensar = Math.max(diasFacturables - diasPagadosEquivalente, 0);
-
-    lastResult = {
-      tarifaHora: Math.round(tarifaHora),
-      tarifaActual: Math.round(v.Ta),
-      perdidaMensual: Math.round(perdidaMensual),
-      perdidaAnual: Math.round(perdidaAnual)
-    };
-
-    animateValue(document.getElementById("valActual"), v.Ta, function(n){ return fmt(n) + "/h"; }, 700);
-    document.getElementById("valActual2").textContent = fmt(v.Ta) + "/h";
-    animateValue(document.getElementById("valRecomendada"), tarifaHora, function(n){ return fmt(n) + "/h"; }, 900);
-
-    const maxBar = Math.max(v.Ta, tarifaHora);
-    setTimeout(function(){
-      document.getElementById("barActual").style.width = Math.max((v.Ta / maxBar) * 100, 4) + "%";
-      document.getElementById("barRecomendada").style.width = Math.max((tarifaHora / maxBar) * 100, 4) + "%";
-    }, 60);
-
-    // Línea de choque visible (sin revelar el número exacto)
-    const shockEl = document.getElementById("shockLine");
-    if (diferenciaHora > 0){
-      const gapPct = Math.round((1 - ratio) * 100);
-      shockEl.innerHTML = 'Tu tarifa actual está <strong>' + gapPct + '% por debajo</strong> de tu mínimo sostenible. Encontramos una pérdida acumulada que probablemente no habías dimensionado.';
-    } else {
-      shockEl.innerHTML = 'Tu tarifa actual está <strong>por encima</strong> de tu mínimo sostenible. Detectamos un margen adicional que puedes estar dejando sobre la mesa en otras áreas.';
-    }
-
-    // Revelación parcial: primer dígito visible, el resto borroso — genera la "agonía" de no ver el número completo
-    const perdidaStr = Math.round(Math.abs(perdidaAnual)).toLocaleString("es-MX");
-    const firstDigit = perdidaStr[0];
-    const restDigits = perdidaStr.slice(1);
-    document.getElementById("partialValue").innerHTML = '$' + firstDigit + '<span class="blur-digit">' + restDigits + '</span>';
-
-    const gapEl = document.getElementById("gapLine");
-    if (diferenciaHora > 0){
-      const gapPct = Math.round((1 - ratio) * 100);
-      const mesesExtra = (perdidaAnual / Math.max(bruto,1)).toFixed(1);
-      gapEl.innerHTML = 'Tu tarifa actual está <strong>' + gapPct + '% por debajo</strong> de tu mínimo sostenible calculado. Al año, esto equivale a aproximadamente <strong>' + mesesExtra + ' meses</strong> de trabajo adicional para compensar la diferencia.';
-    } else {
-      gapEl.innerHTML = 'Tu tarifa actual está <strong>por encima</strong> de tu mínimo sostenible calculado. Estás capturando un margen adicional real.';
-    }
-
-    animateValue(document.getElementById("mHora"), Math.abs(diferenciaHora), fmt, 700);
-    animateValue(document.getElementById("mDia"), Math.abs(perdidaDiaria), fmt, 800);
-    animateValue(document.getElementById("mSemana"), Math.abs(perdidaSemanal), fmt, 900);
-    animateValue(document.getElementById("mMes"), Math.abs(perdidaMensual), fmt, 1000);
-    animateValue(document.getElementById("mEnero"), Math.abs(perdidaDesdeEnero), fmt, 900);
-    animateValue(document.getElementById("m5anos"), Math.abs(perdida5anos), fmt, 1100);
-
-    const diasEl = document.getElementById("diasLine");
-    diasEl.innerHTML = 'Hoy trabajas cerca de <strong>' + diasFacturables + ' días</strong> al mes. Pero tu remuneración equivale a aproximadamente <strong>' + Math.round(diasPagadosEquivalente) + ' días</strong>. Los otros ' + Math.round(diasSinCompensar) + ' días representan valor que generas sin recibir una compensación adecuada. Esto no significa que trabajes poco — significa que tu estructura de precios está afectando tu rentabilidad.';
-
-    const tag = document.querySelector(".restricted-tag");
-    tag.style.animation = "none"; void tag.offsetWidth; tag.style.animation = "";
-
-    checkIfUnlocked();
-  }
-
-  // ================= LEAD CAPTURE + UNLOCK =================
-  function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
-
-  function sendLeadToSheet(email){
-    const payload = Object.assign({}, answers, lastResult, { email: email, fecha: new Date().toISOString() });
-    fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST", mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify(payload)
-    }).catch(function(err){ console.error("No se pudo guardar el lead:", err); });
-  }
-
-  document.getElementById("unlockBtn").addEventListener("click", function(){
-    const emailInput = document.getElementById("leadEmail");
-    const errorEl = document.getElementById("emailError");
-    const email = emailInput.value.trim();
-    if (!isValidEmail(email)){
-      errorEl.classList.remove("hidden");
-      emailInput.focus();
-      return;
-    }
-    errorEl.classList.add("hidden");
-    sendLeadToSheet(email);
-
-    try {
-      fbq('track', 'Lead', { content_name: 'Tarifa Real - Informe' });
-      fbq('track', 'InitiateCheckout', { value: 149, currency: 'MXN' });
-    } catch(e) {}
-
-    const separator = CHECKOUT_URL.includes("?") ? "&" : "?";
-    window.location.href = CHECKOUT_URL + separator + "email=" + encodeURIComponent(email);
-  });
-
-  function unlockReport(){
-    const content = document.getElementById("restrictedContent");
-    const tagEl = document.querySelector(".restricted-tag");
-    content.style.filter = "none";
-    content.style.pointerEvents = "auto";
-    if (tagEl){ tagEl.textContent = "Informe liberado"; tagEl.style.color = "#4fce8a"; tagEl.style.background = "rgba(79,206,138,0.1)"; tagEl.style.borderColor = "rgba(79,206,138,0.35)"; }
-    const unlockCard = document.querySelector(".unlock-card");
-    if (unlockCard) unlockCard.remove();
-
-    try {
-      if (!sessionStorage.getItem("tr_purchase_fired")){
-        fbq('track', 'Purchase', { value: 149, currency: 'MXN' });
-        sessionStorage.setItem("tr_purchase_fired", "1");
-      }
-    } catch(e) {}
-  }
-
-  function checkIfUnlocked(){
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("pagado") === "true"){ unlockReport(); return; }
-    // OPCIÓN 2 (backend propio): reemplazar por verificación real de token.
-    // const token = params.get("token");
-    // if (token) { fetch("/api/verificar-token?token=" + encodeURIComponent(token)).then(r => r.json()).then(d => { if (d.valido) unlockReport(); }); }
-  }
-
-  renderStep();
-</script>
-
-<!--
-  ======================================================================
-  CONFIGURAR EL GUARDADO DE LEADS (Google Sheets) — paso a paso
-  ======================================================================
-  1. Crea una hoja nueva en Google Sheets (sheets.google.com).
-
-  2. Ve a Extensiones > Apps Script. Borra el código de ejemplo y pega esto:
-
-     function doPost(e) {
-       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-       var data = JSON.parse(e.postData.contents);
-       sheet.appendRow([
-         new Date(),
-         data.email,
-         data.I, data.G, data.T, data.D, data.V, data.H, data.Ta,
-         data.tarifaActual, data.tarifaHora, data.perdidaMensual, data.perdidaAnual
-       ]);
-       return ContentService.createTextOutput("ok");
-     }
-
-  3. Clic en "Implementar" > "Nueva implementación" > tipo "Aplicación
-     web". En "Quién tiene acceso" elige "Cualquier usuario". Copia la
-     URL que te da (termina en /exec).
-
-  4. Pega esa URL en la constante GOOGLE_SCRIPT_URL al inicio del script
-     de esta página.
-
-  5. Prueba: completa el flujo en esta página, escribe un correo y haz
-     clic en "Quiero desbloquear mi informe". Revisa tu Google Sheet —
-     debería aparecer una fila nueva, incluso antes de completar el pago.
-
-  Para el envío del correo con el link a entrega.html después del pago,
-  ver plantilla-correo-entrega.txt.
-  ======================================================================
--->
+<script src="script.js"></script>
 
 </body>
 </html>
