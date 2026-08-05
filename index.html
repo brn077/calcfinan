@@ -317,6 +317,58 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   }
 
   .compare-block { margin: 4px 0 20px; }
+
+  .teaser-block { margin: 4px 0 14px; }
+  .teaser-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .teaser-line strong { color: var(--text); font-size: 17px; }
+  .teaser-line.dim { color: var(--text-dim); font-size: 13.5px; }
+  .masked {
+    display: inline-block;
+    filter: blur(4px);
+    user-select: none;
+    color: var(--accent);
+  }
+
+  .shock-line {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--surface-2);
+    border-left: 2px solid var(--restricted);
+    border-radius: 4px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+
+  .partial-reveal {
+    text-align: center;
+    margin-bottom: 4px;
+    padding: 18px 0 6px;
+  }
+  .partial-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+  .partial-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .partial-value .blur-digit {
+    filter: blur(7px);
+    display: inline-block;
+  }
   .compare-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
   .compare-row .who { font-size: 12.5px; color: var(--text-dim); }
   .compare-row .val { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; }
@@ -481,21 +533,18 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
 
     <!-- REPORT -->
     <div id="resultState" class="hidden">
-      <div class="report-tag">Comparación de tarifa</div>
-      <div class="compare-block">
-        <div class="compare-row"><span class="who">Hoy cobras</span><span class="val" id="valActual">$0/h</span></div>
-        <div class="compare-bar-track"><div class="compare-bar-fill current" id="barActual" style="width:0%"></div></div>
-        <div class="compare-row"><span class="who">Tarifa mínima sostenible</span><span class="val" id="valRecomendada">$0/h</span></div>
-        <div class="compare-bar-track"><div class="compare-bar-fill recommended" id="barRecomendada" style="width:0%"></div></div>
+      <div class="report-tag">Auditoría completada</div>
+
+      <div class="teaser-block">
+        <div class="teaser-line">Hoy cobras <strong id="valActual">$0/h</strong></div>
+        <div class="teaser-line dim">Tu tarifa mínima sostenible es <span class="masked">$•••</span>/h</div>
       </div>
 
-      <div class="gap-line" id="gapLine"></div>
+      <div class="shock-line" id="shockLine"></div>
 
-      <div class="metric-grid">
-        <div class="metric-card"><div class="label">Pérdida / hora</div><div class="value" id="mHora">$0</div></div>
-        <div class="metric-card"><div class="label">Pérdida diaria</div><div class="value" id="mDia">$0</div></div>
-        <div class="metric-card"><div class="label">Pérdida semanal</div><div class="value" id="mSemana">$0</div></div>
-        <div class="metric-card"><div class="label">Pérdida mensual</div><div class="value" id="mMes">$0</div></div>
+      <div class="partial-reveal">
+        <div class="partial-label">Pérdida acumulada detectada</div>
+        <div class="partial-value" id="partialValue">$•,•••</div>
       </div>
 
       <div class="restricted-section">
@@ -505,7 +554,18 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
         </div>
 
         <div class="restricted-content" id="restrictedContent">
+          <div class="compare-block">
+            <div class="compare-row"><span class="who">Hoy cobras</span><span class="val" id="valActual2">$0/h</span></div>
+            <div class="compare-bar-track"><div class="compare-bar-fill current" id="barActual" style="width:0%"></div></div>
+            <div class="compare-row"><span class="who">Tarifa mínima sostenible</span><span class="val" id="valRecomendada">$0/h</span></div>
+            <div class="compare-bar-track"><div class="compare-bar-fill recommended" id="barRecomendada" style="width:0%"></div></div>
+          </div>
+          <div class="gap-line" id="gapLine"></div>
           <div class="metric-grid">
+            <div class="metric-card"><div class="label">Pérdida / hora</div><div class="value" id="mHora">$0</div></div>
+            <div class="metric-card"><div class="label">Pérdida diaria</div><div class="value" id="mDia">$0</div></div>
+            <div class="metric-card"><div class="label">Pérdida semanal</div><div class="value" id="mSemana">$0</div></div>
+            <div class="metric-card"><div class="label">Pérdida mensual</div><div class="value" id="mMes">$0</div></div>
             <div class="metric-card"><div class="label">Pérdida desde enero</div><div class="value" id="mEnero">$0</div></div>
             <div class="metric-card"><div class="label">Proyección a 5 años</div><div class="value" id="m5anos">$0</div></div>
           </div>
@@ -513,12 +573,12 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
         </div>
 
         <div class="unlock-card">
-          <p>La parte más reveladora de tu informe permanece restringida. Se libera al confirmar tu auditoría — también te la enviamos a tu correo.</p>
+          <p>Tu informe completo ya está calculado — con el número exacto de lo que estás perdiendo y la tarifa que debes cobrar desde hoy. Se libera al confirmar, y también te lo enviamos a tu correo.</p>
           <div class="email-row">
             <input type="email" id="leadEmail" placeholder="tu@email.com" autocomplete="email">
           </div>
           <div class="email-error hidden" id="emailError">Ingresa un correo válido para continuar.</div>
-          <button class="unlock-btn" id="unlockBtn">Quiero desbloquear mi informe</button>
+          <button class="unlock-btn" id="unlockBtn">Quiero saber cuánto estoy perdiendo</button>
           <div class="price-line">Costo simbólico de activación: <strong>$97 MXN</strong> · se acredita si tu informe no revela ninguna pérdida real</div>
         </div>
       </div>
@@ -707,8 +767,8 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
       perdidaAnual: Math.round(perdidaAnual)
     };
 
-    animateValue(document.getElementById("valActual"), v.Ta, fmt, 700);
-    document.getElementById("valActual").textContent = fmt(v.Ta) + "/h";
+    animateValue(document.getElementById("valActual"), v.Ta, function(n){ return fmt(n) + "/h"; }, 700);
+    document.getElementById("valActual2").textContent = fmt(v.Ta) + "/h";
     animateValue(document.getElementById("valRecomendada"), tarifaHora, function(n){ return fmt(n) + "/h"; }, 900);
 
     const maxBar = Math.max(v.Ta, tarifaHora);
@@ -716,6 +776,21 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
       document.getElementById("barActual").style.width = Math.max((v.Ta / maxBar) * 100, 4) + "%";
       document.getElementById("barRecomendada").style.width = Math.max((tarifaHora / maxBar) * 100, 4) + "%";
     }, 60);
+
+    // Línea de choque visible (sin revelar el número exacto)
+    const shockEl = document.getElementById("shockLine");
+    if (diferenciaHora > 0){
+      const gapPct = Math.round((1 - ratio) * 100);
+      shockEl.innerHTML = 'Tu tarifa actual está <strong>' + gapPct + '% por debajo</strong> de tu mínimo sostenible. Encontramos una pérdida acumulada que probablemente no habías dimensionado.';
+    } else {
+      shockEl.innerHTML = 'Tu tarifa actual está <strong>por encima</strong> de tu mínimo sostenible. Detectamos un margen adicional que puedes estar dejando sobre la mesa en otras áreas.';
+    }
+
+    // Revelación parcial: primer dígito visible, el resto borroso — genera la "agonía" de no ver el número completo
+    const perdidaStr = Math.round(Math.abs(perdidaAnual)).toLocaleString("es-MX");
+    const firstDigit = perdidaStr[0];
+    const restDigits = perdidaStr.slice(1);
+    document.getElementById("partialValue").innerHTML = '$' + firstDigit + '<span class="blur-digit">' + restDigits + '</span>';
 
     const gapEl = document.getElementById("gapLine");
     if (diferenciaHora > 0){
