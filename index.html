@@ -155,12 +155,15 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   }
 
   .panel {
-    background: var(--surface);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)), rgba(19,19,22,0.72);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 18px;
     padding: 28px 26px;
     position: relative;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: box-shadow 0.4s ease;
   }
 
   .panel-header {
@@ -207,7 +210,64 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     height: 100%;
     background: linear-gradient(90deg, var(--accent), #f4c07a);
     width: 0%;
-    transition: width 0.35s cubic-bezier(.4,0,.2,1);
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 0 12px rgba(232,162,61,0.5);
+  }
+
+  .progress-msg {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin: -14px 0 16px;
+    min-height: 14px;
+    opacity: 0;
+    animation: msgFade 1.8s ease-in-out forwards;
+  }
+  @keyframes msgFade {
+    0% { opacity: 0; transform: translateY(-2px); }
+    15% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .step-check {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(79,206,138,0.12);
+    border: 2px solid #4fce8a;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .step-check.show { animation: checkPop 0.65s cubic-bezier(.2,.8,.2,1) forwards; }
+  .step-check svg { width: 32px; height: 32px; }
+  @keyframes checkPop {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.4); }
+    35%  { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
+    55%  { transform: translate(-50%,-50%) scale(1); }
+    80%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1); }
+  }
+
+  .affirm-toast {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #4fce8a;
+    min-height: 16px;
+    margin-bottom: 4px;
+  }
+
+  /* subtle "vibration" feedback on answer confirm */
+  .pulse-confirm { animation: pulseConfirm 0.3s ease-out; }
+  @keyframes pulseConfirm {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.015); }
+    100% { transform: scale(1); }
   }
 
   /* ---------- quiz step ---------- */
@@ -254,6 +314,20 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   .step-hint { font-size: 12.5px; color: var(--text-faint); line-height: 1.55; margin-bottom: 22px; }
 
   .step-nav { display: flex; gap: 10px; }
+
+  .trust-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--text-faint);
+    letter-spacing: 0.02em;
+  }
 
   .btn {
     font-family: 'Inter', sans-serif;
@@ -306,7 +380,53 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   .analysis-log .done { color: #4a7a5f; }
   @keyframes logIn { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } }
 
-  /* ---------- report ---------- */
+  /* ---------- conclusion moment ---------- */
+  .conclusion-badge {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4fce8a;
+    background: rgba(79,206,138,0.1);
+    border: 1px solid rgba(79,206,138,0.3);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 18px;
+    animation: stepIn 0.4s ease-out;
+  }
+  .conclusion-list { margin-bottom: 16px; }
+  .conclusion-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-dim);
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateX(-8px);
+    animation: itemIn 0.4s ease-out forwards;
+  }
+  .conclusion-item:last-child { border-bottom: none; }
+  #cItem1 { animation-delay: 0.2s; }
+  #cItem2 { animation-delay: 0.9s; }
+  #cItem3 { animation-delay: 1.6s; }
+  @keyframes itemIn {
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .c-check {
+    color: #4fce8a;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .conclusion-note {
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--text-faint);
+    line-height: 1.5;
+    opacity: 0;
+    animation: itemIn 0.5s ease-out 2.2s forwards;
+  }
   .report-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10.5px;
@@ -369,6 +489,58 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     filter: blur(7px);
     display: inline-block;
   }
+
+  .solution-block {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 4px 0 18px;
+  }
+  .solution-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .solution-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+    padding: 5px 0;
+  }
+
+  .includes-list {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  .includes-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+  .includes-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    padding: 4px 0;
+  }
+  .includes-item .c-check { color: #4fce8a; }
   .compare-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
   .compare-row .who { font-size: 12.5px; color: var(--text-dim); }
   .compare-row .val { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; }
@@ -520,7 +692,15 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
         <span id="progressPercent">0%</span>
       </div>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-msg" id="progressMsg"></div>
       <div class="step" id="stepContainer"></div>
+      <div class="trust-row">
+        <span>✔ Proceso seguro</span><span>✔ Datos protegidos</span><span>✔ Análisis personalizado</span>
+      </div>
+    </div>
+
+    <div class="step-check" id="stepCheck">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#4fce8a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
 
     <!-- ANALYSIS SEQUENCE -->
@@ -529,6 +709,17 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
       <div class="analysis-stage mono"><span id="stageText">Iniciando...</span><span class="cursor">▍</span></div>
       <div class="progress-track"><div class="progress-fill" id="analysisFill"></div></div>
       <div class="analysis-log mono" id="analysisLog"></div>
+    </div>
+
+    <!-- CONCLUSION MOMENT -->
+    <div id="conclusionState" class="hidden">
+      <div class="conclusion-badge">Análisis concluido</div>
+      <div class="conclusion-list">
+        <div class="conclusion-item" id="cItem1"><span class="c-check">✔</span> Perfil analizado</div>
+        <div class="conclusion-item" id="cItem2"><span class="c-check">✔</span> Criterios verificados</div>
+        <div class="conclusion-item" id="cItem3"><span class="c-check">✔</span> Resultado preparado</div>
+      </div>
+      <div class="conclusion-note">Encontramos información relevante con base en lo que compartiste.</div>
     </div>
 
     <!-- REPORT -->
@@ -545,6 +736,14 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
       <div class="partial-reveal">
         <div class="partial-label">Pérdida acumulada detectada</div>
         <div class="partial-value" id="partialValue">$•,•••</div>
+      </div>
+
+      <div class="solution-block">
+        <div class="solution-header">A partir de hoy, esto cambia</div>
+        <div class="solution-item"><span class="c-check">✔</span> Tu tarifa mínima exacta, calculada con tus propios números</div>
+        <div class="solution-item"><span class="c-check">✔</span> Cuánto te cuesta cada mes seguir cobrando como hoy</div>
+        <div class="solution-item"><span class="c-check">✔</span> Tu proyección real a 1 y 5 años si nada cambia</div>
+        <div class="solution-item"><span class="c-check">✔</span> Un número claro para dejar de dudar la próxima vez que cotices</div>
       </div>
 
       <div class="restricted-section">
@@ -574,12 +773,19 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
 
         <div class="unlock-card">
           <p>Tu informe completo ya está calculado — con el número exacto de lo que estás perdiendo y la tarifa que debes cobrar desde hoy. Se libera al confirmar, y también te lo enviamos a tu correo.</p>
+          <div class="includes-list">
+            <div class="includes-title">Tu informe completo incluye</div>
+            <div class="includes-item"><span class="c-check">✔</span> Tu tarifa mínima exacta por hora y por proyecto</div>
+            <div class="includes-item"><span class="c-check">✔</span> Comparativa completa: hoy vs. lo que deberías cobrar</div>
+            <div class="includes-item"><span class="c-check">✔</span> Pérdida real: por hora, día, semana, mes y año</div>
+            <div class="includes-item"><span class="c-check">✔</span> Proyección a 5 años si tu tarifa no cambia</div>
+          </div>
           <div class="email-row">
             <input type="email" id="leadEmail" placeholder="tu@email.com" autocomplete="email">
           </div>
           <div class="email-error hidden" id="emailError">Ingresa un correo válido para continuar.</div>
           <button class="unlock-btn" id="unlockBtn">Quiero saber cuánto estoy perdiendo</button>
-          <div class="price-line">Costo simbólico de activación: <strong>$97 MXN</strong> · se acredita si tu informe no revela ninguna pérdida real</div>
+          <div class="price-line">Costo simbólico de activación: <strong>$149 MXN</strong> · se acredita si tu informe no revela ninguna pérdida real</div>
         </div>
       </div>
     </div>
@@ -652,12 +858,28 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     requestAnimationFrame(frame);
   }
 
+  const PROGRESS_MESSAGES = [
+    "Comenzando tu análisis...",
+    "Organizando tu perfil...",
+    "Refinando tu análisis...",
+    "Comparando posibilidades...",
+    "Verificando criterios...",
+    "Ya casi. Falta poco.",
+    "Tu análisis está tomando forma..."
+  ];
+  const AFFIRMATIONS = ["Perfecto.", "Excelente.", "Muy bien.", "Correcto.", "Anotado.", "Listo."];
+
   // ================= QUIZ RENDER =================
   function renderStep(){
     const item = QUESTIONS[current];
     document.getElementById("progressLabel").textContent = "Punto " + (current + 1) + " de " + QUESTIONS.length;
     document.getElementById("progressPercent").textContent = Math.round((current / QUESTIONS.length) * 100) + "%";
     document.getElementById("progressFill").style.width = Math.round((current / QUESTIONS.length) * 100) + "%";
+
+    const msgEl = document.getElementById("progressMsg");
+    msgEl.style.animation = "none"; void msgEl.offsetWidth;
+    msgEl.textContent = PROGRESS_MESSAGES[current] || "Continuando...";
+    msgEl.style.animation = "";
 
     const isLast = current === QUESTIONS.length - 1;
     const existingValue = answers[item.id] !== undefined ? answers[item.id] : item.default;
@@ -670,6 +892,7 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
         '<span class="suffix">' + item.suffix + '</span>' +
       '</div>' +
       '<div class="step-hint">' + item.hint + '</div>' +
+      '<div class="affirm-toast" id="affirmToast"></div>' +
       '<div class="step-nav">' +
         (current > 0 ? '<button class="btn btn-ghost" id="backBtn">Atrás</button>' : '') +
         '<button class="btn btn-primary" id="nextBtn">' + (isLast ? "Analizar mi información" : "Siguiente") + '</button>' +
@@ -685,18 +908,38 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     if (backBtn) backBtn.addEventListener("click", function(){ current--; renderStep(); });
   }
 
+  function showCheckBurst(){
+    const check = document.getElementById("stepCheck");
+    check.classList.remove("show"); void check.offsetWidth;
+    check.classList.add("show");
+  }
+
   function handleNext(){
     const item = QUESTIONS[current];
     const val = parseFloat(document.getElementById("stepInput").value) || 0;
     answers[item.id] = val;
     tick(680);
 
-    if (current === QUESTIONS.length - 1){
-      runAnalysis();
-    } else {
-      current++;
-      renderStep();
-    }
+    // Refuerzo positivo inmediato + micro-vibración visual antes de avanzar
+    const panel = document.querySelector(".panel");
+    panel.classList.remove("pulse-confirm"); void panel.offsetWidth;
+    panel.classList.add("pulse-confirm");
+
+    const affirmEl = document.getElementById("affirmToast");
+    if (affirmEl) affirmEl.textContent = AFFIRMATIONS[current % AFFIRMATIONS.length];
+    showCheckBurst();
+
+    const nextBtn = document.getElementById("nextBtn");
+    if (nextBtn) nextBtn.disabled = true;
+
+    setTimeout(function(){
+      if (current === QUESTIONS.length - 1){
+        runAnalysis();
+      } else {
+        current++;
+        renderStep();
+      }
+    }, 420);
   }
 
   // ================= CINEMATIC ANALYSIS =================
@@ -716,7 +959,7 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
         if (prevLine) prevLine.classList.add("done");
       }
       if (i >= ANALYSIS_STAGES.length){
-        setTimeout(showResult, 300);
+        setTimeout(showConclusion, 700);
         return;
       }
       stageEl.textContent = ANALYSIS_STAGES[i];
@@ -729,14 +972,23 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
 
       tick(520 + i * 30);
       i++;
-      setTimeout(nextStage, 600 + Math.random() * 600);
+      setTimeout(nextStage, 950 + Math.random() * 750);
     }
     nextStage();
   }
 
+  function showConclusion(){
+    document.getElementById("analysisState").classList.add("hidden");
+    document.getElementById("conclusionState").classList.remove("hidden");
+    tick(600);
+    setTimeout(function(){ tick(650); }, 900);
+    setTimeout(function(){ tick(700); }, 1600);
+    setTimeout(showResult, 3000);
+  }
+
   // ================= RESULT CALC =================
   function showResult(){
-    document.getElementById("analysisState").classList.add("hidden");
+    document.getElementById("conclusionState").classList.add("hidden");
     document.getElementById("resultState").classList.remove("hidden");
 
     const v = answers;
@@ -843,7 +1095,7 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
 
     try {
       fbq('track', 'Lead', { content_name: 'Tarifa Real - Informe' });
-      fbq('track', 'InitiateCheckout', { value: 97, currency: 'MXN' });
+      fbq('track', 'InitiateCheckout', { value: 149, currency: 'MXN' });
     } catch(e) {}
 
     const separator = CHECKOUT_URL.includes("?") ? "&" : "?";
@@ -861,7 +1113,7 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
 
     try {
       if (!sessionStorage.getItem("tr_purchase_fired")){
-        fbq('track', 'Purchase', { value: 97, currency: 'MXN' });
+        fbq('track', 'Purchase', { value: 149, currency: 'MXN' });
         sessionStorage.setItem("tr_purchase_fired", "1");
       }
     } catch(e) {}
