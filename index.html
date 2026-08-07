@@ -1046,11 +1046,10 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
       shockEl.innerHTML = 'Tu tarifa actual está <strong>por encima</strong> de tu mínimo sostenible. Detectamos un margen adicional que puedes estar dejando sobre la mesa en otras áreas.';
     }
 
-    // Revelación parcial: primer dígito visible, el resto borroso — genera la "agonía" de no ver el número completo
+    // Revelación parcial: número completo borroso, ni un dígito visible —
+    // el lead no debe tener ninguna ancla numérica antes de pagar.
     const perdidaStr = Math.round(Math.abs(perdidaAnual)).toLocaleString("es-MX");
-    const firstDigit = perdidaStr[0];
-    const restDigits = perdidaStr.slice(1);
-    document.getElementById("partialValue").innerHTML = '$' + firstDigit + '<span class="blur-digit">' + restDigits + '</span>';
+    document.getElementById("partialValue").innerHTML = '$<span class="blur-digit">' + perdidaStr + '</span>';
 
     const gapEl = document.getElementById("gapLine");
     if (diferenciaHora > 0){
