@@ -50,9 +50,9 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     background: var(--bg);
     background-image:
       radial-gradient(ellipse 800px 500px at 50% -10%, rgba(232,162,61,0.06), transparent),
-      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: auto, 48px 48px, 48px 48px;
+      radial-gradient(ellipse 400px 300px at 80% 50%, rgba(232,162,61,0.03), transparent),
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 8px);
+    background-size: auto, auto, 12px 12px;
     font-family: 'Inter', -apple-system, sans-serif;
     color: var(--text);
     padding: 56px 18px 100px;
@@ -109,14 +109,14 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   }
 
   .panel {
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)), rgba(19,19,22,0.72);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)), rgba(19,19,22,0.8);
     backdrop-filter: blur(24px) saturate(140%);
     -webkit-backdrop-filter: blur(24px) saturate(140%);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 28px 26px;
+    padding: 32px 28px;
     position: relative;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 0 60px rgba(232,162,61,0.03);
     transition: box-shadow 0.4s ease;
   }
 
@@ -124,7 +124,7 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border);
   }
@@ -154,9 +154,9 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     justify-content: space-between;
   }
   .progress-track {
-    height: 3px;
+    height: 4px;
     background: var(--surface-2);
-    border-radius: 3px;
+    border-radius: 4px;
     margin-bottom: 22px;
     overflow: hidden;
   }
@@ -164,8 +164,8 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     height: 100%;
     background: linear-gradient(90deg, var(--accent), #f4c07a);
     width: 0%;
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
-    box-shadow: 0 0 12px rgba(232,162,61,0.5);
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 0 16px rgba(232,162,61,0.4);
   }
 
   .progress-msg {
@@ -216,7 +216,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     margin-bottom: 4px;
   }
 
-  /* subtle "vibration" feedback on answer confirm */
   .pulse-confirm { animation: pulseConfirm 0.3s ease-out; }
   @keyframes pulseConfirm {
     0% { transform: scale(1); }
@@ -225,9 +224,9 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   }
 
   /* ---------- quiz step ---------- */
-  .step { animation: stepIn 0.35s cubic-bezier(.2,.8,.3,1); }
+  .step { animation: stepIn 0.4s cubic-bezier(.2,.8,.3,1); }
   @keyframes stepIn {
-    from { opacity: 0; transform: translateY(6px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
@@ -248,9 +247,12 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     border-radius: 10px;
     padding: 14px 16px;
     margin-bottom: 10px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .step-input-row:focus-within { border-color: var(--accent); }
+  .step-input-row:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
   .step-input-row .prefix { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--text-dim); }
   .step-input-row input {
     flex: 1;
@@ -262,6 +264,12 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     border: none;
     outline: none;
     width: 100%;
+  }
+  .step-input-row input::placeholder {
+    color: var(--text-faint);
+    opacity: 0.5;
+    font-weight: 400;
+    font-size: 16px;
   }
   .step-input-row .suffix { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text-faint); }
 
@@ -293,10 +301,17 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     cursor: pointer;
     display: inline-block;
   }
-  .btn-primary { background: var(--accent); color: #1a1206; flex: 1; text-align: center; transition: filter 0.15s, transform 0.15s; }
-  .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+  .btn-primary {
+    background: linear-gradient(180deg, #f0b358, var(--accent));
+    color: #1a1206;
+    flex: 1;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(232,162,61,0.2);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(232,162,61,0.35); }
+  .btn-primary:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(232,162,61,0.2); }
+  .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; }
   .btn-ghost:hover { border-color: var(--text-faint); color: var(--text); }
 
   /* ---------- analysis sequence ---------- */
@@ -521,11 +536,13 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     margin-bottom: 20px;
   }
   .metric-card {
-    background: var(--surface-2);
+    background: rgba(27,27,31,0.6);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 12px 14px;
+    transition: background 0.2s;
   }
+  .metric-card:hover { background: rgba(27,27,31,0.85); }
   .metric-card .label { font-size: 10.5px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
   .metric-card .value { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; }
 
@@ -598,15 +615,15 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     border: none; border-radius: 10px;
     padding: 15px; cursor: pointer;
     box-shadow: 0 8px 24px rgba(232,162,61,0.25);
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition: transform 0.2s, box-shadow 0.3s;
     animation: inviteGlow 2.4s ease-in-out infinite;
   }
   @keyframes inviteGlow {
     0%, 100% { box-shadow: 0 8px 24px rgba(232,162,61,0.25); }
-    50% { box-shadow: 0 8px 30px rgba(232,162,61,0.45); }
+    50% { box-shadow: 0 8px 36px rgba(232,162,61,0.45); }
   }
-  .unlock-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(232,162,61,0.32); animation: none; }
-  .unlock-btn:active { transform: translateY(0); }
+  .unlock-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 32px rgba(232,162,61,0.35); animation: none; }
+  .unlock-btn:active { transform: translateY(0) scale(1); }
 
   .price-line { font-size: 11px; color: var(--text-faint); margin-top: 10px; line-height: 1.5; }
   .price-line strong { color: var(--text-dim); }
@@ -624,13 +641,14 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .step, .analysis-log div, .restricted-tag, .scan-ring { animation: none; }
+    .step, .analysis-log div, .restricted-tag, .scan-ring, .unlock-btn { animation: none; }
   }
 
   /* ===== LIVE COUNTER ===== */
   .live-counter-wrap {
-    max-width: 460px;
-    margin: 18px auto 0;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
     text-align: center;
   }
 
@@ -638,7 +656,7 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--surface-2);
+    background: rgba(27,27,31,0.5);
     border: 1px solid var(--border);
     border-radius: 30px;
     padding: 6px 20px 6px 14px;
@@ -646,7 +664,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     font-size: 13px;
     color: var(--text-dim);
     backdrop-filter: blur(8px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
 
   .live-dot {
@@ -672,12 +689,12 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     min-width: 28px;
     display: inline-block;
     text-align: center;
-    transition: color 0.2s;
+    transition: color 0.25s, transform 0.25s;
   }
 
   .live-counter .count.flash {
     color: var(--accent);
-    transform: scale(1.1);
+    transform: scale(1.12);
   }
 </style>
 </head>
@@ -797,14 +814,14 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ===== LIVE COUNTER ===== -->
-  <div class="live-counter-wrap">
-    <div class="live-counter">
-      <span class="live-dot"></span>
-      <span class="count" id="liveCount">23</span>
-      <span>profesionales ya corrigieron su tarifa hoy</span>
+    <!-- LIVE COUNTER (integrado) -->
+    <div class="live-counter-wrap">
+      <div class="live-counter">
+        <span class="live-dot"></span>
+        <span class="count" id="liveCount">23</span>
+        <span>profesionales ya corrigieron su tarifa hoy</span>
+      </div>
     </div>
   </div>
 </div>
@@ -820,13 +837,13 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   document.getElementById("reportId").textContent = "ID-" + Math.floor(100000 + Math.random()*900000);
 
   const QUESTIONS = [
-    { id: "I",  q: "¿Cuánto quieres ganar neto al mes?", hint: "Lo que necesitas que quede disponible después de gastos e impuestos.", prefix: "$", suffix: "MXN / mes", default: 30000 },
-    { id: "G",  q: "¿Cuánto gastas al mes solo para operar?", hint: "Software, herramientas, internet, espacio de trabajo.", prefix: "$", suffix: "MXN / mes", default: 2000 },
-    { id: "T",  q: "¿Qué porcentaje reservas para impuestos?", hint: "Usa un estimado si no llevas el cálculo exacto.", prefix: "", suffix: "%", default: 15 },
-    { id: "D",  q: "¿Cuántos días hábiles tiene tu mes?", hint: "Déjalo en 22 si no estás seguro.", prefix: "", suffix: "días", default: 22 },
-    { id: "V",  q: "¿Cuántos de esos días no facturas?", hint: "Imprevistos, feriados, días sin clientes.", prefix: "", suffix: "días", default: 4 },
-    { id: "H",  q: "¿Cuántas horas al día realmente facturas?", hint: "Sin reuniones, propuestas ni tareas administrativas.", prefix: "", suffix: "horas", default: 4 },
-    { id: "Ta", q: "¿Cuánto cobras hoy por hora?", hint: "Tu tarifa actual, aunque no sea fija.", prefix: "$", suffix: "MXN/h", default: 150 }
+    { id: "I",  q: "¿Cuánto quieres ganar neto al mes?", hint: "Lo que necesitas que quede disponible después de gastos e impuestos.", prefix: "$", suffix: "MXN / mes", placeholder: "Ej: 35000" },
+    { id: "G",  q: "¿Cuánto gastas al mes solo para operar?", hint: "Software, herramientas, internet, espacio de trabajo.", prefix: "$", suffix: "MXN / mes", placeholder: "Ej: 2500" },
+    { id: "T",  q: "¿Qué porcentaje reservas para impuestos?", hint: "Usa un estimado si no llevas el cálculo exacto.", prefix: "", suffix: "%", placeholder: "Ej: 20" },
+    { id: "D",  q: "¿Cuántos días hábiles tiene tu mes?", hint: "Déjalo en 22 si no estás seguro.", prefix: "", suffix: "días", placeholder: "Ej: 22" },
+    { id: "V",  q: "¿Cuántos de esos días no facturas?", hint: "Imprevistos, feriados, días sin clientes.", prefix: "", suffix: "días", placeholder: "Ej: 4" },
+    { id: "H",  q: "¿Cuántas horas al día realmente facturas?", hint: "Sin reuniones, propuestas ni tareas administrativas.", prefix: "", suffix: "horas", placeholder: "Ej: 5" },
+    { id: "Ta", q: "¿Cuánto cobras hoy por hora?", hint: "Tu tarifa actual, aunque no sea fija.", prefix: "$", suffix: "MXN/h", placeholder: "Ej: 180" }
   ];
 
   const ANALYSIS_STAGES = [
@@ -847,7 +864,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
 
   function fmt(n){ return "$" + Math.round(n).toLocaleString("es-MX"); }
 
-  // ================= AUDIO (opcional, minimalista) =================
   let audioCtx = null;
   function tick(freq){
     try {
@@ -862,7 +878,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     } catch(e) {}
   }
 
-  // ================= COUNT-UP ANIMATION =================
   function animateValue(el, to, formatFn, duration){
     const start = performance.now();
     const dur = duration || 900;
@@ -886,7 +901,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
   ];
   const AFFIRMATIONS = ["Perfecto.", "Excelente.", "Muy bien.", "Correcto.", "Anotado.", "Listo."];
 
-  // ================= QUIZ RENDER =================
   function renderStep(){
     const item = QUESTIONS[current];
     document.getElementById("progressLabel").textContent = "Punto " + (current + 1) + " de " + QUESTIONS.length;
@@ -903,13 +917,13 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     msgEl.style.animation = "";
 
     const isLast = current === QUESTIONS.length - 1;
-    const existingValue = answers[item.id] !== undefined ? answers[item.id] : item.default;
+    const existingValue = answers[item.id] !== undefined ? answers[item.id] : "";
 
     document.getElementById("stepContainer").innerHTML =
       '<div class="step-question">' + item.q + '</div>' +
       '<div class="step-input-row">' +
         (item.prefix ? '<span class="prefix">' + item.prefix + '</span>' : '') +
-        '<input type="number" id="stepInput" value="' + existingValue + '" inputmode="decimal">' +
+        '<input type="number" id="stepInput" value="' + existingValue + '" placeholder="' + (item.placeholder || '') + '" inputmode="decimal">' +
         '<span class="suffix">' + item.suffix + '</span>' +
       '</div>' +
       '<div class="step-hint">' + item.hint + '</div>' +
@@ -937,7 +951,22 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
 
   function handleNext(){
     const item = QUESTIONS[current];
-    const val = parseFloat(document.getElementById("stepInput").value) || 0;
+    const input = document.getElementById("stepInput");
+    const val = parseFloat(input.value) || 0;
+
+    // Validación: si está vacío o cero, mostramos un aviso rápido
+    if (val === 0 || input.value.trim() === "") {
+      const toast = document.getElementById("affirmToast");
+      toast.textContent = "Por favor, ingresa un valor válido.";
+      toast.style.color = "#e2574c";
+      input.focus();
+      input.select();
+      // vibración sutil en el input
+      input.style.borderColor = "#e2574c";
+      setTimeout(() => { input.style.borderColor = ""; }, 800);
+      return;
+    }
+
     answers[item.id] = val;
     tick(680);
 
@@ -946,7 +975,10 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     panel.classList.add("pulse-confirm");
 
     const affirmEl = document.getElementById("affirmToast");
-    if (affirmEl) affirmEl.textContent = AFFIRMATIONS[current % AFFIRMATIONS.length];
+    if (affirmEl) {
+      affirmEl.textContent = AFFIRMATIONS[current % AFFIRMATIONS.length];
+      affirmEl.style.color = "#4fce8a";
+    }
     showCheckBurst();
 
     const nextBtn = document.getElementById("nextBtn");
@@ -963,7 +995,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     }, 420);
   }
 
-  // ================= CINEMATIC ANALYSIS =================
   function runAnalysis(){
     document.getElementById("quizState").classList.add("hidden");
     document.getElementById("analysisState").classList.remove("hidden");
@@ -1007,7 +1038,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     setTimeout(showResult, 3000);
   }
 
-  // ================= RESULT CALC =================
   function showResult(){
     document.getElementById("conclusionState").classList.add("hidden");
     document.getElementById("resultState").classList.remove("hidden");
@@ -1088,7 +1118,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     checkIfUnlocked();
   }
 
-  // ================= UNLOCK =================
   function sendAnonymousLog(){
     const payload = Object.assign({}, answers, lastResult, { email: "", fecha: new Date().toISOString() });
     fetch(GOOGLE_SCRIPT_URL, {
@@ -1131,7 +1160,6 @@ src="https://www.facebook.com/tr?id=792872853072313&ev=PageView&noscript=1"
     if (params.get("pagado") === "true"){ unlockReport(); return; }
   }
 
-  // ================= FAKE LIVE COUNTER =================
   (function liveCounter() {
     const el = document.getElementById('liveCount');
     let currentCount = Math.floor(Math.random() * (48 - 5 + 1)) + 5;
